@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 10, 2018 8:14:55 PM by Hibernate Tools 5.1.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.vas.model.CronJobMonitoring" table="cron_job_monitoring" schema="public" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="java.lang.String">
+            <column name="description" not-null="true" />
+        </property>
+        <property name="code" type="java.lang.String">
+            <column name="code" not-null="true" unique="true" />
+        </property>
+        <property name="function" type="java.lang.String">
+            <column name="function" />
+        </property>
+        <property name="intervalType" type="java.lang.String">
+            <column name="interval_type" />
+        </property>
+        <property name="intervalNumber" type="java.lang.Integer">
+            <column name="interval_number" />
+        </property>
+        <property name="args" type="java.lang.String">
+            <column name="args" />
+        </property>
+        <property name="numbercall" type="java.lang.Integer">
+            <column name="numbercall" />
+        </property>
+        <property name="nextcall" type="java.util.Date">
+            <column name="nextcall" length="29" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="priority" />
+        </property>
+        <property name="active" type="java.lang.String">
+            <column name="active" />
+        </property>
+        <property name="createdAt" type="java.util.Date">
+            <column name="created_at" length="29" not-null="true" />
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <column name="updated_at" length="29" />
+        </property>
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" not-null="true" />
+        </property>
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" />
+        </property>
+    </class>
+</hibernate-mapping>
