@@ -1,0 +1,75 @@
+/* YOUR CUSTOM STYLES */
+
+        .full-height,
+        .full-height body,
+        .full-height header,
+        .full-height header .view, 
+        .full-height body .view {
+            height: 100%; 
+        } 
+
+        @media (max-width: 740px) {
+            .full-height,
+            .full-height body,
+            .full-height header,
+            .full-height header .view,
+            .full-height body .view {
+                height: 700px; 
+            } 
+        }
+        
+        @media (min-width: 1000px) and (max-width: 1025px) {
+            .full-height,
+            .full-height body,
+            .full-height header,
+            .full-height header .view,
+            .full-height body .view {
+                height: 770px; 
+            } 
+        }
+        
+        .navbar {
+            background-color: transparent;
+        }
+        
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+        
+        .top-nav-collapse {
+            background-color: #FFCC00;
+        }
+        
+        footer.page-footer {
+            background-color: #00337c;
+            margin-top: 0;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #FFCC00;
+            }
+        }
+        /* Carousel*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        .carousel-caption {
+            height: 100%;
+            padding-top: 7rem;
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+
+.list-product{
+    color: #747373;
+    font-size: 1.0rem;
+}
