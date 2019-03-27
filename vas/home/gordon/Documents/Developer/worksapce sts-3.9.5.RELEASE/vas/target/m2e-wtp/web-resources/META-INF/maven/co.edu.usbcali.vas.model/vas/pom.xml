@@ -1,0 +1,407 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>co.edu.usbcali.vas.model</groupId>
+	<artifactId>vas</artifactId>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
+	<name>vas</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<hibernate.version>5.2.16.Final</hibernate.version>
+		<primefaces.version>6.2</primefaces.version>
+		<spring.version>5.0.5.RELEASE</spring.version>
+		<spring.security.version>5.0.4.RELEASE</spring.security.version>
+		<mojarra.version>2.2.12</mojarra.version>
+		<slf4j.version>1.7.21</slf4j.version>
+		<log4j2.version>2.7</log4j2.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>${mojarra.version}</version>
+		</dependency>
+
+		<!-- Primefaces -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${primefaces.version}</version>
+		</dependency>
+		<!-- Primefaces -->
+
+		<!-- Spring Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Spring Framework -->
+		<!-- Hibernate Framework -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- Hibernate Framework -->
+
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet.jsp.jstl</artifactId>
+			<version>3.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet.jsp</artifactId>
+			<version>3.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet</artifactId>
+			<version>3.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jamonapi</groupId>
+			<artifactId>jamon</artifactId>
+			<version>2.79</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hazelcast-all</artifactId>
+					<groupId>com.hazelcast</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<!-- Apache commons -->
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.4.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-digester</artifactId>
+					<groupId>commons-digester</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Apache commons -->
+
+
+		<!-- Logger -->
+		<!-- LOGS log4j2 y SLF4J -->
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- LOGS log4j2 y SLF4J -->
+		<!-- Logger -->
+
+		<!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
+		</dependency>
+		<!-- Jackson JSON Mapper -->
+
+		<!-- Junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Junit -->
+
+		<!-- Mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
+		<!-- Mail -->
+
+		<!-- Excel Exporters -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.13</version>
+		</dependency>
+		<!-- Exporters -->
+
+		<!-- PDF Exporters -->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<!-- Exporters -->
+
+		<!-- Render Menu Dinamico -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- Render Menu Dinamico -->
+
+		<!-- JasperReports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>bouncycastle</groupId>
+					<artifactId>bcmail-jdk14</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>bouncycastle</groupId>
+					<artifactId>bcprov-jdk14</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>bouncycastle</groupId>
+					<artifactId>bctsp-jdk14</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>eclipse</groupId>
+					<artifactId>jdtcore</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- JasperReports -->
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- aerogear-otp-java -->
+		<dependency>
+			<groupId>org.jboss.aerogear</groupId>
+			<artifactId>aerogear-otp-java</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- aerogear-otp-java -->
+
+		<!-- FTP -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+		</dependency>
+
+		<!-- Postgres - JDBC -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.1.3</version>
+		</dependency>
+		<!-- Postgres - JDBC -->
+
+		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180130</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sqs</artifactId>
+			<version>1.11.76</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<version>3.0</version>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
