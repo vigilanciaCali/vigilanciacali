@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" class="full-height">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Proyecto Videoanalítica</title>
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+  	<link rel="stylesheet" type="text/css" href="css/style.css">
+  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  	<link rel="stylesheet" href="css/style-modal.css"/>
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+</head>
+<body>
+    <header>
+     <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+            <div class="container">
+                <a class="navbar-brand font-bold" href="#" style="color: #00337c;">
+                    PROYECTO VIDEO ANALITICA
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+
+                    	<li class="nav-item" style="margin-left: 300px;">
+                  
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">INICIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#information">INFORMACIÓN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#modules">MÓDULOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#institutions">ENTIDADES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">CONTÁCTENOS</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 30px;">
+                  
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#!">Soporte Técnico</a>
+                        </li> -->
+                    </ul>
+                    <form class="form-inline">
+                    	<a href="en">
+                        <img src="img/en.png" height="20" width="40" alt="versión eng">
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    <!--/.Navbar-->
+
+    <!--######################################Carousel Wrapper########################################33-->
+        <div id="video-carousel-example2" class="carousel slide carousel-fade" data-ride="carousel">
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#video-carousel-example2" data-slide-to="0" class="active"></li>
+            <li data-target="#video-carousel-example2" data-slide-to="1"></li>
+            <li data-target="#video-carousel-example2" data-slide-to="2"></li>
+
+        </ol>
+        <!--/.Indicators-->
+
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
+            <div class="carousel-item active">
+                <!--Mask color-->
+                <div class="view hm-black-light">
+
+                    <!--Video source-->
+                    <video class="video-full" autoplay loop height="768">
+                        <source src="video/slider1.mp4" type="video/mp4" />
+                    </video>
+                    <div class="full-bg-img"></div>
+                </div>
+
+                <!--Caption-->
+                <div class="carousel-caption">
+                    <div class="flex-center animated fadeInDown">
+                        <ul>
+                            <li>
+                                <h1 class="h1-responsive font-bold">VIGILANCIA INTELIGENTE</h1>
+                            </li>
+                            <li>
+                                <h5>Bienvenidos a la página web del proyecto de Vigilancia Inteligente para la red de cámaras de la Policía Metropolitana de Cali.</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Caption-->
+            </div>
+            <!--/First slide-->
+
+            <!--Second slide-->
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view hm-blue-slight">
+                    <!--Video source-->
+                    <video class="video-full" autoplay loop height="768">
+                        <source src="video/slider2.mp4" type="video/mp4" />
+                    </video>
+                    <div class="mask"></div>
+                </div>
+
+            </div>
+            <!--/Second slide-->
+
+             <!--Third slide-->
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view hm-blue-slight">
+                    <!--Video source-->
+                    <video class="video-full" autoplay loop height="768">
+                        <source src="video/slider3.mp4" type="video/mp4" />
+                    </video>
+                    <div class="mask"></div>
+                </div>
+           
+            </div>
+             <!--Third slide-->
+
+
+        </div>
+        <!--/.Slides-->
+
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#video-carousel-example2" role="button" data-slide="prev">
+            <span class="fas fa-angle-left" style="font-size: 35px;"></span>
+        </a>
+        <a class="carousel-control-next" href="#video-carousel-example2" role="button" data-slide="next">
+            <span class="fas fa-angle-right" style="font-size: 35px;"></span>
+        </a>
+        <!--/.Controls-->
+    </div>
+    <!--/.Carousel Wrapper-->
+
+    </header>
+
+    <br/>
+     <!-- Main container-->
+    <div class="container">
+
+        <!--Section: ########################################ABOUT################################################-->
+        <section id="information" class="text-justify wow fadeIn" data-wow-delay="0.2s">
+
+            <div class="divider-new pt-5">
+                <h2 class="h2-responsive wow fadeIn" data-wow-delay="0.2s" style="color: #00337c;">Información</h2>
+            </div>
+
+            <p>Este es un proyecto de investigación financiado por Colciencias, y ejecutado por la Pontificia Universidad Javeriana de Cali, NASS S.A.S, y la Universidad San Buenaventura de Cali en la ciudad de Santiago de Cali, Colombia.</p>
+             <p>
+            El proyecto propone diseñar e implementar algoritmos de análisis de video robustos con respecto a distorsiones de video para la red de vigilancia de Santiago de Cali administrada por la Policía Metropolitana de Cali (MECAL). Dentro de estos algoritmos se encuentra un seguidor de objetos y un detector de eventos anómalos en video. La captura y el manejo de la información extraída a partir de videos de vigilancia permiten tomar decisiones oportunas para garantizar la seguridad territorial en la ciudad.</p>
+
+        </section>
+        <!--Section: About-->
+
+        <!--/Section: ########################################PRODUCTS############################################## -->
+
+        <!--Section: Best features-->
+        <section id="modules">
+
+            <div class="divider-new pt-5">
+                <h2 class="h2-responsive wow fadeIn" style="color: #00337c;">Módulos</h2>
+            </div>
+
+            <div class="row pt-3">
+
+                <!--First columnn-->
+               <div class="col-lg-3 mb-r">
+                    
+                     <!-- <div id="video1" class="card wow fadeIn" data-wow-delay="0.2s" style="background-color: #00337c;">
+                        
+                        <div align="center">
+                        	<br>
+                        	<i class="fab fa-java" style="font-size: 100px; color: #FFCC00;"></i>
+                        	
+                  		</div>
+                   
+                        <div class="card-body">
+                            
+                            <h4 class="card-title text-center" style="color: white;">Video-analítica software</h4>
+                          
+                            <hr style="border-color: white;">
+                             <p class="card-text" style="text-align: center; color: white; margin-bottom: 40px;">
+                            	Sistema transaccional que permite administrar el análisis de los videos.
+                            </p>
+                          
+                        </div>
+
+                    </div> -->
+                    
+                    <!--/.Card-->
+                </div>
+                <!--First columnn-->
+
+                <!--Second columnn-->
+                <div class="col-lg-3 mb-r">
+                    <!--Card-->
+                     <a>
+                     <div id="video2" class="card wow fadeIn" data-wow-delay="0.4s" style="background-color: #00337c;">
+                     	<div align="center">
+                        	<br>
+                        	<i class="fas fa-file-import" style="font-size: 100px; color: #FFCC00;"></i>
+                  		</div>     
+                        <!--Card content-->
+                        <div class="card-body" align="center">
+                            <!--Title-->
+                            <h4 class="card-title text-center" style="color: white;">Seguidor de Objetos en Video (QAVT)</h4>
+                         
+                            <hr style="border-color: white;">
+                            <!--Text-->
+                            <p class="card-text" style="text-align: center; color: white; margin-bottom: 40px; ">
+                            	Algoritmo que permite realizar seguimientos de objetos en el video.
+							</p>
+
+							<a class="btn btn-primary btn-sm" rel="nofollow">Ver Video</a>
+						
+                        </div>
+
+                    </div>
+                     </a>
+                    <!--/.Card-->
+                </div>
+                <!--Second columnn-->
+
+                <!--Third columnn-->
+                <div class="col-lg-3 mb-r">
+                    <!--Card-->
+                    <a>
+                    <div id="video3" class="card wow fadeIn" data-wow-delay="0.4s" style="background-color: #00337c;">
+                    	<div align="center">
+                    		<br>
+                        	<i class="fas fa-file-video" style="font-size: 100px; color: #FFCC00;"></i>
+                  		</div>
+                        <!--Card content-->
+                        <div class="card-body" align="center">
+                            <!--Title-->
+                            <h4 class="card-title text-center" style="color: white;">Detección de eventos anómalos</h4>
+                            <hr style="border-color: white;">
+                            <!--Text-->
+                            <p class="card-text" style="text-align: center; color: white;">
+                            	Algoritmo que permite detectar eventos como atracos, merodeo, peleas y abandono de objetos.
+							</p>
+
+							<a class="btn btn-primary btn-sm" rel="nofollow">Ver Video</a>
+                        					
+                        </div>
+
+                    </div>
+                	</a>
+                    <!--/.Card-->
+                </div>
+                <!--Third columnn-->
+
+                <!--First columnn-->
+                <div class="col-lg-3 mb-r">
+                    <!--Card-->
+                    <!-- <div id="video4" class="card wow fadeIn" data-wow-delay="0.4s" style="background-color: #00337c;">
+                    	<div align="center">
+                        	<br>
+                        	<i class="fas fa-eye" style="font-size: 100px; color: #FFCC00;"></i>
+                  		</div>
+                      
+                        <div class="card-body">
+                            
+                            <h4 class="card-title text-center" style="color: white;">Detección de eventos anómalos</h4>
+                            <hr style="border-color: white;">
+                           
+                            <p class="card-text" style="text-align: center; color: white; margin-bottom:60px;">
+                            	Recolección de información para ser analizada.
+							</p>
+                        </div>
+                    </div>
+                   
+                </div> -->
+                <!--First columnn-->
+            </div>
+
+        </section>
+
+        <!--/Section: ########################################SERVICES############################################## -->
+        <section id="institutions" class="text-center wow fadeIn" data-wow-delay="0.2s">
+
+            <div class="divider-new pt-5">
+                <h2 class="h2-responsive wow fadeIn" data-wow-delay="0.2s" style="color: #00337c;">Entidades participantes</h2>
+            </div>
+
+            <!--######################################Carousel Wrapper########################################33-->
+        <div id="video-carousel-example3" class="carousel" >
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#video-carousel-example3" data-slide-to="0" class="active"></li>
+            <li data-target="#video-carousel-example3" data-slide-to="1"></li>
+            <li data-target="#video-carousel-example3" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
+
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
+            <div class="carousel-item active">
+                <div class="row">
+                	<div class="col-sm-1"></div>
+  					<div class="col-sm-3"><img src="img/slider/logo1.png" height="auto" width="100%"></div>
+  					<div class="col-sm-3"><img src="img/slider/logo2.png" height="auto" width="100%"></div>
+  					<div class="col-sm-3"><img src="img/slider/logo3.png" height="auto" width="100%"></div>
+  					<div class="col-sm-1"></div>
+				</div>
+            </div>
+            <!--/First slide-->
+
+            <!--Second slide-->
+            <div class="carousel-item">
+            	<div class="row">
+            		<div class="col-sm-1"></div>
+  					<div class="col-sm-3"><img src="img/slider/logo4.png" height="auto" width="100%"></div>
+  					<div class="col-sm-3"><img src="img/slider/logo5.png" height="auto" width="100%"></div>
+  					<div class="col-sm-3"><img src="img/slider/logo6.png" height="auto" width="100%"></div>
+  					<div class="col-sm-1"></div>
+				</div>
+            </div>
+            <!--/Second slide-->
+        </div>
+        <!--/.Slides-->
+
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#video-carousel-example3" role="button" data-slide="prev">
+        	<span class="fas fa-angle-left" style="font-size: 40px; background-color: #035096;"></span>
+        </a>
+        <a class="carousel-control-next" href="#video-carousel-example3" role="button" data-slide="next">
+            <span class="fas fa-angle-right" style="font-size: 40px; background-color: #035096;"></span>
+        </a>
+        <!--/.Controls-->
+    </div>
+    <!--/.Carousel Wrapper-->
+
+    </section>
+
+    <!--/Section: ########################################CONTACT############################################## -->
+
+    	</br>
+    	<br>
+
+    </div>
+    <!--Main layout-->
+
+   <!-- ################VIDEO MODAL################### -->
+
+	<div id="modal2" class="modal">
+  		<span id="close2" class="close" style="color: #B0D9FF; font-size: 80px; margin-right: 30px;">&times;</span>
+  		<div align="center">
+  			<video class="video-full" autoplay loop height="600" width="800">
+        		<source src="video/popup1.mp4" type="video/mp4" />
+        	</video>
+  		</div>	
+  		
+  		<div id="caption"></div>
+	</div>
+
+	<div id="modal3" class="modal">
+  		<span id="close3" class="close" style="color: #B0D9FF; font-size: 80px; margin-right: 30px;">&times;</span>
+  		<div align="center">
+  			<video class="video-full" autoplay loop height="600" width="800">
+        		<source src="video/popup2.mp4" type="video/mp4" />
+        	</video>
+  		</div>	
+  		
+  		<div id="caption"></div>
+	</div>
+
+	<!--######################################## PQRS MODAL############################################## -->
+    <div id="pqrs" class="modal">
+
+                <div class="form">
+                    <form id="formpqrs" class="login-form" action="">
+
+                        <div class="formHeader mb-1 pt-3">
+                            <h5><i class="fa fa-envelope"></i> PQRS</h5>
+                        </div>
+
+                        <div align="center"> <p id="message_error_pqrs" style="color: red"></p> </div>
+                                
+                        <div class="row">
+                           <!--Grid column-->
+                           <div class="col-md-12">
+                               <div class="md-form">
+                                   <input type="text" id="namepqrs" class="form-control"></input>
+                                   <label>Nombre y Apellido</label>
+                               </div> 
+                            </div>
+
+                            <div class="col-md-12">
+                               <div class="md-form">
+                                   <input type="text" id="companypqrs" class="form-control"></input>
+                                   <label>Empresa</label>
+                               </div> 
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <input type="text" id="emailpqrs" class="form-control"></input>
+                                    <label>Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <input type="text" id="phonepqrs" class="form-control"></input>
+                                    <label>Teléfono Móvil</label>
+                                </div>        
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="md-form">
+
+                                    <select id="pqrstype">
+                                        <option value="-1">- Seleccione -</option>
+                                        <option value="PETICION">Petición</option>
+                                        <option value="QUEJA">Queja</option>
+                                        <option value="RECLAMO">Reclamo</option>
+                                        <option value="SUGERENCIA">Sugerencia</option>
+                                        <option value="OTRO">Otro</option>
+                                    </select>
+                                    
+                                </div>        
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                   	<textarea type="text" id="messagepqrs" class="md-textarea"></textarea>
+                                       	<label for="form-text">Mensaje</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            <a class="btn btn-default" onclick="register_pqrs()" style="background-color: #2C75FF;">Enviar</a>
+                            <!-- <button id="send" type="submit" class="btn btn-default">Enviar</button> -->
+                            <!-- <input type="submit" name="submit" value="Submit"> -->
+                            <br/>
+                            <a href="#" onclick="close_modal_pqrs();">
+                                <i class="fa fa-remove"></i> Salir 
+                            </a>
+                    </form>
+                </div>
+    </div>
+
+    <!--******************************************FOOTER********************************************************-->
+    <footer class="page-footer center-on-small-only">
+
+        <!--Footer links-->
+        <div class="container-fluid">
+
+        	<div align="center">
+                <h2 class="h2-responsive wow fadeIn" style="color: #white;">Contáctenos</h2>
+            </div>
+
+            <br>
+
+            <div class="row">
+
+            	<div class="col-md-4">
+            	</div>
+                <!--Third column-->
+                <div class="col-md-4">
+                    <ul class="text-center list-unstyled">
+                        <li class="wow fadeIn" data-wow-delay="0.2s"><i class="fa fa-map-marker teal-text fa-lg"></i>
+                            <p>Cali, Colombia, Suramérica</p>
+                        </li>
+                
+                        <a href="mailto:vigilanciacali@javerianacali.edu.co?Subject=Contacto desde web" target="_top">
+                        <li class="wow fadeIn mt-5 pt-2" data-wow-delay="0.4s"><i class="fa fa-envelope teal-text fa-lg"></i>
+                            <p>vigilanciacali@javerianacali.edu.co</p>
+                        </li>
+                        </a>
+                    </ul>
+                </div>
+                <!--Fourth column-->
+                <div class="col-md-4">
+
+                </div>
+                <!--/.Fourth column-->
+            </div>
+        </div>
+        <!--/.Footer links-->
+        <hr>
+
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2018 Copyright: <a href="index.html"> Video Vigilancia Cali</a>
+            </div>
+        </div>
+        <!--/.Copyright-->  
+    </footer>
+    <!--/.Footer-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap dropdown -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- SCROLL -->
+    <script src="js/action.js"></script>
+	<!-- QR MODAL FOOTER -->
+	<script src="js/popup.js"></script>
+
+</body>
+</html>
