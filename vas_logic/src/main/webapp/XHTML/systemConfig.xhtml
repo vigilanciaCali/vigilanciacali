@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>		
+	
+	<h:body>
+		<ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		<ui:define name="body">	
+		<f:view>
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+			<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   				<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+			</p:dialog>
+			
+			<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+			
+			
+			<h:form id="formDialog">
+				<p:messages id="msg" />
+				<p:growl id="men"/>
+					<p:panel id="panelSystemConfig" header="SystemConfig">							
+						<h:panelGrid columns="2" id="panelGrid" >
+												 	<h:outputText id="msgId" value="Id"/>
+						 	<p:inputText id="txtId" binding="#{systemConfigView.txtId}">
+						 		<p:ajax update="panelSystemConfig,msg,panelBotones" listener="#{systemConfigView.listener_txtId}"/>
+						 	</p:inputText>	
+																		
+													<h:outputText id="msgBooleanValue" value=" BooleanValue"/>
+							<p:inputText id="txtBooleanValue" disabled="true" binding="#{systemConfigView.txtBooleanValue}"/>
+													<h:outputText id="msgCode" value=" Code"/>
+							<p:inputText id="txtCode" disabled="true" binding="#{systemConfigView.txtCode}"/>
+													<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+							<p:inputText id="txtCreatedBy" disabled="true" binding="#{systemConfigView.txtCreatedBy}"/>
+													<h:outputText id="msgDoubleValue" value=" DoubleValue"/>
+							<p:inputText id="txtDoubleValue" disabled="true" binding="#{systemConfigView.txtDoubleValue}"/>
+													<h:outputText id="msgIntValue" value=" IntValue"/>
+							<p:inputText id="txtIntValue" disabled="true" binding="#{systemConfigView.txtIntValue}"/>
+													<h:outputText id="msgName" value=" Name"/>
+							<p:inputText id="txtName" disabled="true" binding="#{systemConfigView.txtName}"/>
+													<h:outputText id="msgTextValue" value=" TextValue"/>
+							<p:inputText id="txtTextValue" disabled="true" binding="#{systemConfigView.txtTextValue}"/>
+													<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+							<p:inputText id="txtUpdatedBy" disabled="true" binding="#{systemConfigView.txtUpdatedBy}"/>
+												
+																				<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{systemConfigView.txtCreatedAt}" >
+								<p:ajax event="dateSelect" listener="#{systemConfigView.listener_txtCreatedAt}"  />
+							</p:calendar>
+														<h:outputText id="msgDateValue" value=" DateValue"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{systemConfigView.txtDateValue}" >
+								<p:ajax event="dateSelect" listener="#{systemConfigView.listener_txtDateValue}"  />
+							</p:calendar>
+														<h:outputText id="msgTimeValue" value=" TimeValue"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{systemConfigView.txtTimeValue}" >
+								<p:ajax event="dateSelect" listener="#{systemConfigView.listener_txtTimeValue}"  />
+							</p:calendar>
+														<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{systemConfigView.txtUpdatedAt}" >
+								<p:ajax event="dateSelect" listener="#{systemConfigView.listener_txtUpdatedAt}"  />
+							</p:calendar>
+																	   </h:panelGrid>
+				</p:panel>
+	   			<p:panel id="panelBotones">
+					<div align="center">					
+						<p:commandButton id="btnSave" binding="#{systemConfigView.btnSave}" disabled="true" value="Save" action="#{systemConfigView.action_save()}" update="panelSystemConfig,msg,panelBotones" />
+						<p:commandButton id="btnDelete" binding="#{systemConfigView.btnDelete}" disabled="true" value="Delete" action="#{systemConfigView.action_delete_master()}" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" update="panelSystemConfig,msg,panelBotones" />
+						<p:commandButton id="btnClear" value="Clear" action="#{systemConfigView.action_clear()}" update="panelSystemConfig,msg,panelBotones" />
+					</div>
+				</p:panel>			
+			</h:form>
+		</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

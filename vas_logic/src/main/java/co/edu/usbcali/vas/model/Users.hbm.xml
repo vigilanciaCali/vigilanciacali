@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 10, 2018 8:14:55 PM by Hibernate Tools 5.1.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.vas.model.Users" table="users" schema="public" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userType" class="co.edu.usbcali.vas.model.UserType" fetch="select">
+            <column name="user_type_id" not-null="true" />
+        </many-to-one>
+        <property name="firstname" type="java.lang.String">
+            <column name="firstname" not-null="true" />
+        </property>
+        <property name="lastname" type="java.lang.String">
+            <column name="lastname" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="active" not-null="true" />
+        </property>
+        <property name="deleted" type="java.lang.Boolean">
+            <column name="deleted" />
+        </property>
+        <property name="login" type="java.lang.String">
+            <column name="login" not-null="true" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" not-null="true" />
+        </property>
+        <property name="passwordSystemGen" type="java.lang.Boolean">
+            <column name="password_system_gen" />
+        </property>
+        <property name="sessionHash" type="java.lang.String">
+            <column name="session_hash" unique="true" />
+        </property>
+        <property name="token" type="java.lang.String">
+            <column name="token" length="100" unique="true" />
+        </property>
+        <property name="lastConnectionDate" type="java.util.Date">
+            <column name="last_connection_date" length="29" />
+        </property>
+        <property name="onSession" type="java.lang.Boolean">
+            <column name="on_session" />
+        </property>
+        <property name="note" type="java.lang.String">
+            <column name="note" />
+        </property>
+        <property name="createdAt" type="java.util.Date">
+            <column name="created_at" length="29" not-null="true" />
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <column name="updated_at" length="29" />
+        </property>
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" not-null="true" />
+        </property>
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" />
+        </property>
+        <set name="messageBoxes" table="message_box" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="co.edu.usbcali.vas.model.MessageBox" />
+        </set>
+        <set name="videos" table="video" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="co.edu.usbcali.vas.model.Video" />
+        </set>
+        <set name="documents" table="document" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="co.edu.usbcali.vas.model.Document" />
+        </set>
+        <set name="tickets" table="ticket" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="co.edu.usbcali.vas.model.Ticket" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="breadcrumb">
+		<li style="color: #257900; font-size: 20px;"><i
+			class="fa fa-video-camera" /> Demo SLIDER</li>
+    </ui:define>
+
+<ui:define name="content">
+	<h:form id="frm">
+		<p:growl id="growl" life="3000" autoUpdate="true" />
+		<div class="ui-g">
+
+
+    <video id="video" width="100%" height="100%" autoplay="autoplay"
+						controls="controls">
+      <source id="mp4" 
+        src="http://localhost/vas/temp/video_demo_2.mp4"
+        type="video/mp4"/>
+
+     
+    </video>
+    
+    <button onclick="myFunction()" type="button">Get video length</button>
+    
+    <div id='buttons'>
+      <button onclick="getVideo().load()">load()</button>
+      <button onclick="getVideo().play()">play()</button>
+      <button onclick="getVideo().pause()">pause()</button><br></br>
+      <button onclick="getVideo().currentTime+=10">currentTime+=10</button>
+      <button onclick="getVideo().currentTime-=10">currentTime-=10</button>
+      <button onclick="getVideo().currentTime=50">currentTime=50</button><br></br>
+      <button onclick="getVideo().playbackRate++">playbackRate++</button>
+      <button onclick="getVideo().playbackRate--">playbackRate--</button>
+      <button onclick="getVideo().playbackRate+=0.1">playbackRate+=0.1</button>
+      <button onclick="getVideo().playbackRate-=0.1">playbackRate-=0.1</button><br></br>
+      <button onclick="getVideo().volume+=0.1">volume+=0.1</button>
+      <button onclick="getVideo().volume-=0.1">volume-=0.1</button>
+      <button onclick="getVideo().muted=true">muted=true</button>
+      <button onclick="getVideo().muted=false">muted=false</button><br></br>
+      <button onclick="switchVideo(0);">Sintel teaser</button>
+
+    </div>
+
+    <table>
+      <caption>Media Events</caption>
+      <tbody id='events'>
+      </tbody>
+    </table>
+    <table>
+      <caption>Media Properties</caption>
+      <tbody id='properties'>
+      </tbody>
+    </table>
+
+
+	
+	</div>
+</h:form>
+
+
+
+<script type="text/javascript">
+
+function service(data) {
+	  console.log("function service");
+
+	  $.post("http://localhost:8080/vas/controller/alg/anomalous/", data,
+		        function(data,status){
+		            alert("Data: " + data + "\nStatus: " + status);
+		        });
+} 
+
+function myFunction() { 
+
+    console.log("video.duration: "+video.duration);
+    var data = video.duration
+    service(data.toString(););
+}
+
+</script>
+
+	
+	</ui:define>
+</ui:composition>

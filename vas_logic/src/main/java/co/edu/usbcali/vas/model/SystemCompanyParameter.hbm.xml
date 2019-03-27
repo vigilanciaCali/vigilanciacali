@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 10, 2018 8:14:55 PM by Hibernate Tools 5.1.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.vas.model.SystemCompanyParameter" table="system_company_parameter" schema="public" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="code" type="java.lang.String">
+            <column name="code" not-null="true" unique="true" />
+        </property>
+        <property name="companyNit" type="java.lang.String">
+            <column name="company_nit" />
+        </property>
+        <property name="companyName" type="java.lang.String">
+            <column name="company_name" />
+        </property>
+        <property name="companyAddress" type="java.lang.String">
+            <column name="company_address" />
+        </property>
+        <property name="companyEmail" type="java.lang.String">
+            <column name="company_email" />
+        </property>
+        <property name="companyWeb" type="java.lang.String">
+            <column name="company_web" />
+        </property>
+        <property name="companyPhone" type="java.lang.String">
+            <column name="company_phone" />
+        </property>
+        <property name="companyLogoUrl" type="java.lang.String">
+            <column name="company_logo_url" />
+        </property>
+        <property name="systemName" type="java.lang.String">
+            <column name="system_name" />
+        </property>
+        <property name="systemUrl" type="java.lang.String">
+            <column name="system_url" />
+        </property>
+        <property name="systemLogoUrl" type="java.lang.String">
+            <column name="system_logo_url" />
+        </property>
+        <property name="systemVersion" type="java.lang.String">
+            <column name="system_version" />
+        </property>
+        <property name="createdAt" type="java.util.Date">
+            <column name="created_at" length="29" not-null="true" />
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <column name="updated_at" length="29" />
+        </property>
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" not-null="true" />
+        </property>
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="breadcrumb">
+		<h1 style="color: #257900;">Mi Cuenta</h1>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:growl id="growl" life="3000" autoUpdate="true" />
+			<div class="ui-g">
+				<div class="ui-g-3"></div>
+				<div class="ui-g-12 ui-lg-12">
+					<div class="card no-margin" align="center">
+						<h1>Info Empresa</h1>
+
+						<h:panelGrid columns="2">
+
+							<h:outputLabel value="Empresa:" />
+							<h:outputText value="#{usuarioAccountView.strNombreCliente}" />
+
+							<h:outputLabel value="Nit:" />
+							<h:outputText value="#{usuarioAccountView.strNitCliente}" />
+
+							<h:outputLabel value="Dirección:" />
+							<h:outputText value="#{usuarioAccountView.strDireccionCliente}" />
+
+							<h:outputLabel value="Cantidad Máxima de Usuarios:" />
+							<h:outputText value="#{usuarioAccountView.strMaxUsuarios}" />
+
+							<h:outputLabel value="Cantidad Máxima de Funcionarios:" />
+							<h:outputText value="#{usuarioAccountView.strMaxFuncionarios}" />
+
+							<h:outputLabel value="Licencia Válida Hasta:" />
+							<h:outputText value="#{usuarioAccountView.licenciaHasta}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+
+						</h:panelGrid>
+
+
+					</div>
+				</div>
+				<div class="ui-g-12 ui-lg-6" align="center">
+					<div class="card no-margin" align="center">
+						<h1>Usuario</h1>
+						<h:panelGrid columns="2" id="panelGrid">
+
+							<h:outputText value="Nombre :" />
+							<p:inputText id="txtUsuNombre"
+								binding="#{usuarioAccountView.txtUsuNombre}"
+								value="#{usuarioAccountView.strName}" maxlength="255" />
+
+							<h:outputText value="Email :" />
+							<p:inputText id="txtUsuLogin"
+								binding="#{usuarioAccountView.txtUsuLogin}"
+								value="#{usuarioAccountView.strLogin}" maxlength="100" />
+
+						</h:panelGrid>
+						<p:spacer />
+						<div align="center">
+							<p:commandButton id="btnSave" value="Actualizar"
+								action="#{usuarioAccountView.action_modify_account()}"
+								update="form" />
+						</div>
+					</div>
+
+				</div>
+
+				<div class="ui-g-12 ui-lg-6" align="center">
+					<div class="card no-margin" align="center">
+						<h1>Contraseña</h1>
+						<h:panelGrid columns="1">
+
+							<p:password id="txtUsuPassword"
+								binding="#{usuarioAccountView.txtUsuPassword}" feedback="true"
+								maxlength="50" placeholder="Nueva Contraseña" />
+
+							<p:password id="txtValidaUsuPassword"
+								binding="#{usuarioAccountView.txtValidaUsuPassword}"
+								maxlength="50" placeholder="Confirmar Contraseña"
+								feedback="true" />
+						</h:panelGrid>
+
+						<p:spacer />
+
+						<div align="center">
+							<p:commandButton id="btnRestablecer" value="Cambiar Contraseña"
+								action="#{usuarioAccountView.action_modify_password()}"
+								update="form" />
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

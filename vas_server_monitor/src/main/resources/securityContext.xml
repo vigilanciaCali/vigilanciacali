@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Author Zathuracode Generator -->
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+      
+    <http auto-config="true" >
+        <intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/controller/*" access="permitAll" />
+        <intercept-url pattern="/index.xhtml" access="permitAll" />
+        <intercept-url pattern="/login.xhtml" access="permitAll" />
+        <intercept-url pattern="/system/*" access="hasRole('ROLE_SYSTEM')" />
+        <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />
+        
+        <form-login login-page="/login.xhtml" authentication-failure-url="/login.html?authfailed=true" default-target-url="/user/dashboard.xhtml" always-use-default-target="false"  />
+			
+		<logout invalidate-session="true" logout-success-url="/login.xhtml?loggedout=true" logout-url="/login.xhtml/j_spring_security_logout" delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" />
+
+ 		<csrf disabled="true"/>
+    </http>
+  
+    <authentication-manager alias="authenticationManager">
+		<authentication-provider ref="authProvider" />
+	</authentication-manager>
+          
+</beans:beans>

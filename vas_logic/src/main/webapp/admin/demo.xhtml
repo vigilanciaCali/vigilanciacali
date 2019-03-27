@@ -1,0 +1,178 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="breadcrumb">
+		<li style="color: #257900; font-size: 20px;"><i
+			class="fa fa-video-camera" /> Demo BoundingBox</li>
+    </ui:define>
+
+<ui:define name="content">
+	<h:form id="frm">
+		<p:growl id="growl" life="3000" autoUpdate="true" />
+		<div class="ui-g">
+
+		<div class="ui-g-12 ui-lg-8">
+			<p:messages id="msg" autoUpdate="true" closable="true" />
+			<p:fieldset legend="Importar Videos" toggleable="true"
+				toggleSpeed="500" collapsed="true">
+
+				<div align="center">
+					<p:fileUpload id="fileUpload"
+						oncomplete="PF('statusDialog').hide();"
+						onstart="PF('statusDialog').show();"
+						fileUploadListener="#{videoAnalysisView.handleFileUpload}"
+						uploadLabel="Cargar" mode="advanced" dragDropSupport="true"
+						label="Seleccionar Video" cancelLabel="Cancelar"
+						invalidFileMessage="Archivo Inválido"
+						allowTypes="/(\.|\/)(mp4|MP4)$/" accept="video/mp4" />
+				</div>
+				<ul>
+					<li>Información sobre carga de videos</li>
+					<li>Las caracteristicas del video deben ser: .</li>
+					<li>Info adicional.</li>
+
+				</ul>
+
+			</p:fieldset>
+
+		</div>
+
+		<div class="ui-g-12 ui-lg-8">
+			<h:form id="frmVideo">
+				<div class="card no-margin">
+					<h1>Reproducción</h1>
+
+					<video id="videoPlayer" width="100%" height="100%" autoplay="autoplay"
+						controls="controls">
+						<source src="https://vigilanciacali.javerianacali.edu.co/vas/temp/policia.mp4"
+									type="video/mp4" />
+					</video>
+				</div>
+				
+				
+	
+			</h:form>
+				
+				
+		</div>
+
+<!-- <div style="display:inline-block;vertical-align:top;">
+  <div>
+    <textarea id="annotation_data" name="annotation" rows="30" cols="50" style="font-family:monospace;" readonly></textarea>
+  </div>
+  <div>
+    <input id="reset_button" type="reset" />
+  </div>
+</div> -->
+	
+	
+	</div>
+</h:form>
+
+<div id="bbox_annotator" class="ui-lg-4"/>
+		
+<button onclick="shoot()" style="width: 64px;border: solid 2px #ccc;">Capture
+    			</button>
+
+<p id="demo"></p>
+
+<script src="../js/bbox_annotator.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    console.log("function BBoxAnnotator");
+  // Initialize the bounding-box annotator.
+  var annotator = new BBoxAnnotator({
+    url: "",
+    input_method: 'fixed',    // Can be one of ['text', 'select', 'fixed']
+    labels: "object",
+    onchange: function(entries) {
+      // Input the text area on change. Use "hidden" input tag unless debugging.
+      //<input id="annotation_data" name="annotation_data" type="hidden" />
+      //$("#annotation_data").val(JSON.stringify(entries));
+      $("#annotation_data").text(JSON.stringify(entries, null, "  "));
+    }
+  });
+  // Initialize the reset button.
+  $("#reset_button").click(function(e) {
+    annotator.clear_all();
+  })
+});
+
+
+var videoId = 'videoPlayer';
+var scaleFactor = 2;
+//var snapshots = [];
+var boundingBoxData = "";
+
+function capture(video, scaleFactor) {
+  console.log("function capture");
+
+    if(scaleFactor == null){
+        scaleFactor = 1;
+    }
+    var w = video.videoWidth * scaleFactor;
+    var h = video.videoHeight * scaleFactor;
+    var canvas = document.createElement('canvas');
+        canvas.width  = w;
+        canvas.height = h;
+    var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, w, h);
+    return canvas;
+} 
+
+function shoot(){
+
+  console.log("function shoot");
+    var video  = document.getElementById(videoId);
+    var output = document.getElementById('bbox_annotator');
+    var canvas = capture(video, scaleFactor);
+
+    output.innerHTML = '';
+    //output.append(canvas);
+    image = new Image();
+    image.setAttribute("crossOrigin", "anonymous");
+    image.src = canvas.toDataURL();
+
+    var annotator = null;
+    var annotator = new BBoxAnnotator({
+    url: image.src,
+    input_method: 'fixed',    // Can be one of ['text', 'select', 'fixed']
+    labels: "object",
+    onchange: function(entries) {
+      // Input the text area on change. Use "hidden" input tag unless debugging.
+      //<input id="annotation_data" name="annotation_data" type="hidden" />
+      //$("#annotation_data").val(JSON.stringify(entries));
+     $("#annotation_data").text(JSON.stringify(entries, null, "  "));
+
+      boundingBoxData = JSON.stringify(entries, null, "  ");
+      
+      console.log("boundingBoxData: "+boundingBoxData);
+      //CALL REST SERVICE
+      service(boundingBoxData);
+
+      
+    }
+  });
+
+
+}
+
+function service(data) {
+	  console.log("function service");
+
+	  $.post("http://localhost:8080/vas/controller/alg/anomalous/",data,
+		        function(data,status){
+		            console.log("Data: " + data + "\nStatus: " + status);
+		        });
+} 
+
+
+</script>
+	
+	</ui:define>
+</ui:composition>

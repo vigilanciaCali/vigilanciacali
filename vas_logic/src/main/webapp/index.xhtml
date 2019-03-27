@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>VAS - Video Analytic System</title>
+	<link rel="shortcut icon" href="images/icon.png" type="image/x-icon"></link>
+</h:head>
+
+<h:body styleClass="login-body">
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:dialog modal="false" header="Cargando..." responsive="true"
+		position="right,bottom"
+		style="background: transparent !important; border: 0 !important; border-style: hidden; box-shadow: 0px 0px 0px #000000;"
+		widgetVar="statusDialog" draggable="false" resizable="false"
+		closable="false">
+		<div align="center">
+			<p:graphicImage height="70%" width="70%"
+				value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/loader.gif" />
+		</div>
+	</p:dialog>
+	
+	<h:form id="formLogin">
+		<div class="body-container">
+			<div class="ui-g">
+				<div class="ui-g-12 ui-lg-6 left-side">
+					<a href="#">
+						<img src="images/logo_ponal.png" width="80px" height="20px" />
+						<img src="images/logo_puj.png" width="80px" height="20px" />
+						<img src="images/logo_usb.png" width="80px" height="20px" />
+						<img src="images/logo_colciencias.png" width="80px" height="20px" />
+						<img src="images/logo_alcaldia.png" width="80px" height="20px" />
+						<img src="images/logo_nass.png" width="80px" height="20px" />
+					</a>
+					<h1>Bienvenido</h1>
+					<p>Ingrese sus datos para iniciar sesión</p>
+				</div>
+				<div class="ui-g-12 ui-lg-6 right-side">
+
+					<div class="login-wrapper">
+
+						<div class="login-container">
+							<p:messages id="message" life="3000" autoUpdate="true"
+								closable="true" style="width: 100%; text-align: center;" />
+							<span class="title">Login</span>
+
+							<div class="ui-g ui-fluid">
+								<div class="ui-g-12">
+									<p:inputText id="txtLogin" binding="#{loginView.txtLogin}"
+										maxlength="60" placeholder="usuario" autocomplete="off" />
+								</div>
+								<div class="ui-g-12">
+									<p:password id="txtPassword" binding="#{loginView.txtPassword}"
+										maxlength="50" placeholder="password" autocomplete="off"
+										feedback="false" />
+								</div>
+								<div class="ui-g-6">
+									<p:commandButton value="Login" icon="fa fa-check"
+										action="#{loginView.login}" update=":formLogin:message" />
+								</div>
+								<div class="ui-g-6 password-container">
+									<p:link href="passwordRestore.xhtml" style="color: #257900;">Olvidó su Password?</p:link>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css"
+			library="apollo-layout" />
+	</h:form>
+</h:body>
+
+</html>

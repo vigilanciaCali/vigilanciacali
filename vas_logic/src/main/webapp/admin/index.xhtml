@@ -1,0 +1,131 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="breadcrumb">
+		<li style="color: #FFCC00; font-size: 20px;"><i
+			class="fa fa-home" /> Inicio</li>
+    </ui:define>
+
+	<ui:define name="content">
+		<div class="ui-g dashboard">
+			
+			
+			<div class="ui-g-12 ui-md-3">
+				<a href="tracker.xhtml">
+				<div class="overview-box overview-box-1">
+					<h1 style="font-size: 15px;">SEGUIDOR DE OBJETOS EN VIDEO</h1>
+					<div class="overview-ratio">
+					<br></br>
+						<i class="fa fa fa-video-camera" style="font-size: 80px; color: white;"></i>
+					</div>
+				</div>
+				</a>
+			</div>
+			
+			<div class="ui-g-12 ui-md-3">
+				<a href="anomalous.xhtml">
+				<div class="overview-box overview-box-1">
+					<h1 style="font-size: 15px;">DETECCIÓN DE OBJETOS ANÓMALOS</h1>
+					<div class="overview-ratio">
+					<br></br>
+						<i class="fa fa fa-video-camera" style="font-size: 80px; color: white;"></i>
+					</div>
+				</div>
+				</a>
+			</div>
+			
+			<div class="ui-g-12 ui-md-6">
+				
+			</div>
+			
+			<!-- <div class="ui-g-12 ui-md-3">
+				<div class="card no-margin">
+				
+					<h1>Información de Interés</h1>
+                        <p:accordionPanel multiple="false">
+                            <p:tab title="Preguntas Frecuentes">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <a href="#{menuView.urlPreguntasFrecuentes}" target="blank">Ingresa al sitio de FAQS</a>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Manual de Usuario">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <a href="#{menuView.urlManualUsuario}" target="blank">Consulta Manual de Usuario en línea</a>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Soporte">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <a href="#{menuView.urlSoporte}" target="blank">Sitio de Soporte</a>
+                                </h:panelGrid>
+                            </p:tab>
+                        </p:accordionPanel>
+
+				</div>
+			</div> -->
+
+			<div class="ui-g-12 ui-md-3">
+				<a href="systemParameter.xhtml">
+				<div class="overview-box overview-box-3">
+					<h1 style="font-size: 15px;">CONFIGURACIÓN</h1>
+					<div class="overview-value">#{empresaView.totalEmpresas}</div>
+					<div class="overview-ratio">
+						<i class="fa fa-cog" style="font-size: 80px; color: white;"></i>
+					</div>
+				</div>
+				</a>
+			</div>
+
+			<div class="ui-g-12 ui-md-3">
+				<a href="systemVideoLog.xhtml">
+				<div class="overview-box overview-box-3">
+					<h1 style="font-size: 15px;">EVENTOS</h1>
+					<div class="overview-value">#{turnosView.totalTurnos}</div>
+					<div class="overview-ratio">
+						<i class="fa fa-bars" style="font-size: 80px; color: white;"></i>
+					</div>
+				</div>
+				</a>
+			</div>
+			
+				<div class="ui-g-12 ui-md-3">
+				<a href="users.xhtml">
+				<div class="overview-box overview-box-3">
+					<h1 style="font-size: 15px;">USUARIOS</h1>
+					<div class="overview-value">#{funcionariosView.totalFuncionarios}</div>
+					<div class="overview-ratio">
+						<i class="fa fa-users" style="font-size: 80px; color: white;"></i>
+					</div>
+				</div>
+				</a>
+			</div>
+
+			
+			<div class="ui-g-12 ui-md-12">
+				<div class="card no-margin" align="center">
+					
+					<img src="../images/logo_ponal.png" width="80px" height="50%" />
+					<img src="../images/logo_puj.png" width="80px" height="50%" />
+					<img src="../images/logo_usb.png" width="80px" height="50%" />
+					<img src="../images/logo_colciencias.png" width="80px" height="50%" />
+					<img src="../images/logo_alcaldia.png" width="80px" height="50%" />
+					<img src="../images/logo_nass.png" width="80px" height="50%" />
+					<h2>Vigilancia Inteligente para la red de cámaras de la Policía Metropolitana de Cali</h2>
+				</div>
+			</div>
+			
+			
+			<div class="ui-g-12 ui-md-12">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			
+			</div>
+			
+
+		</div>
+	</ui:define>
+</ui:composition>

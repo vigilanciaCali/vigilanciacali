@@ -1,0 +1,48 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/apollo">
+
+    <div class="layout-menu-container">
+        <div class="nano">
+            <div class="nano-content menu-scroll-content">
+                <div class="layout-menu-title">MENU</div>
+                <h:form id="menuform">
+                    <pa:menu>
+                        <p:menuitem id="apl_dashboard" value="Inicio" icon="fa fa-home" outcome="index"/>
+                        
+                        <p:submenu id="vas_1" label="Video Análisis" icon="fa fa-video-camera">
+							<p:menuitem id="vas_01" value="1. Seguidor de Objetos" icon="fa fa-video-camera" outcome="tracker" />
+							<p:menuitem id="vas_02" value="2. Detección de Objetos Anómalos" icon="fa fa-video-camera" outcome="anomalous" />
+						</p:submenu>
+						
+						<p:submenu id="vas_2" label="Historial de Video Análisis" icon="fa fa-file-video-o">
+							<p:menuitem id="vas_03" value="1. Seguidor de Objetos" icon="fa fa-file-video-o" outcome="videoListTracker"/>
+							<p:menuitem id="vas_04" value="2. Objetos Anómalos" icon="fa fa-file-video-o" outcome="videoListAnomalous"/>
+						</p:submenu>
+
+                        <p:submenu id="apl_config" label="Sistema" icon="fa fa-cog">
+                    		<p:menuitem id="sis0" value="1. Parametros" outcome="systemParameter" />
+                    		<p:menuitem id="sis1" value="2. Eventos" outcome="systemVideoLog" />
+                    	</p:submenu>
+	
+      					<p:submenu id="um_exit" label="Salir" icon="fa fa-sign-out">
+							<p:menuitem value="Salir de la aplicación" icon="fa fa-sign-out" action="#{loginView.closeSession()}" />
+						</p:submenu>
+      					
+                    	
+          
+                    </pa:menu>
+
+                </h:form>
+                
+                <div class="nano-scroll-footer" />
+            </div>
+        </div>
+    </div>
+
+
+</ui:composition>
