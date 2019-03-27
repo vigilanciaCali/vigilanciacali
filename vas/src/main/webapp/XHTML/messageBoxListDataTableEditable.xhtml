@@ -1,0 +1,261 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+	    <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+		 
+		 <h:form id="form">
+			
+			 
+			<p:panel id="msgProjectClientesTitle" header="MessageBoxData">
+					<p:messages id="msg" />
+				<p:dataTable id ="tabla" value="#{messageBoxView.data}" var="messageBox"
+					paginator="true" rows="5"  editable="true" >
+					 
+					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{messageBoxView.rowEventListener}" />
+					
+															<p:column filterBy="#{messageBox.id}" sortBy="#{messageBox.id}" headerText="id">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{messageBox.id}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{messageBox.id}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    										
+											
+						<p:column filterBy="#{messageBox.createdBy}" sortBy="#{messageBox.createdBy}" 
+							headerText="createdBy">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.createdBy}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.createdBy}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.link}" sortBy="#{messageBox.link}" 
+							headerText="link">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.link}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.link}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.message}" sortBy="#{messageBox.message}" 
+							headerText="message">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.message}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.message}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.pictureLink}" sortBy="#{messageBox.pictureLink}" 
+							headerText="pictureLink">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.pictureLink}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.pictureLink}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.read}" sortBy="#{messageBox.read}" 
+							headerText="read">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.read}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.read}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.sent}" sortBy="#{messageBox.sent}" 
+							headerText="sent">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.sent}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.sent}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.subject}" sortBy="#{messageBox.subject}" 
+							headerText="subject">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.subject}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.subject}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.updatedBy}" sortBy="#{messageBox.updatedBy}" 
+							headerText="updatedBy">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.updatedBy}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.updatedBy}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{messageBox.id_Users}" sortBy="#{messageBox.id_Users}" 
+							headerText="id_Users">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.id_Users}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{messageBox.id_Users}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+										
+										   						 
+						 <p:column filterBy="#{messageBox.createdAt}" sortBy="#{messageBox.createdAt}" 
+							headerText="createdAt">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.createdAt}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{messageBox.createdAt}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{messageBoxView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{messageBox.updatedAt}" sortBy="#{messageBox.updatedAt}" 
+							headerText="updatedAt">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{messageBox.updatedAt}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{messageBox.updatedAt}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{messageBoxView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   											
+					<p:column headerText="Options" >
+						<p:rowEditor id="row"/>
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
+						<p:commandButton id="btnDelete" actionListener="#{messageBoxView.actionDeleteDataTableEditable}" title="Delete" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" icon="ui-icon-trash" update=":form:msg,:form:tabla" >
+							<f:attribute name="selectedMessageBox" value="#{messageBox}" />  
+						</p:commandButton>
+						
+					</p:column>	
+				
+				</p:dataTable>	
+					
+				
+			</p:panel>
+				
+	   </h:form>
+		 </f:view>
+			</ui:define>		
+		</ui:composition>	
+	
+	</h:body>	
+	
+</html>	

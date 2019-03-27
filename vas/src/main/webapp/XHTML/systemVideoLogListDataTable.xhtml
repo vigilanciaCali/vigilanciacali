@@ -1,0 +1,152 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableSystemVideoLog" header="SystemVideoLogData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{systemVideoLogView.data}" var="systemVideoLog"
+								paginator="true" rows="5">
+										
+										<p:column filterBy="#{systemVideoLog.id}" sortBy="#{systemVideoLog.id}" >
+										 <f:facet name="header">
+										<h:outputText value="id"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.id}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{systemVideoLog.actionDate}" sortBy="#{systemVideoLog.actionDate}" >
+										 <f:facet name="header">
+										<h:outputText value="ActionDate"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.actionDate}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemVideoLog.actionName}" sortBy="#{systemVideoLog.actionName}" >
+										 <f:facet name="header">
+										<h:outputText value="ActionName"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.actionName}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemVideoLog.ip}" sortBy="#{systemVideoLog.ip}" >
+										 <f:facet name="header">
+										<h:outputText value="Ip"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.ip}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemVideoLog.note}" sortBy="#{systemVideoLog.note}" >
+										 <f:facet name="header">
+										<h:outputText value="Note"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.note}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemVideoLog.userId}" sortBy="#{systemVideoLog.userId}" >
+										 <f:facet name="header">
+										<h:outputText value="UserId"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.userId}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemVideoLog.userName}" sortBy="#{systemVideoLog.userName}" >
+										 <f:facet name="header">
+										<h:outputText value="UserName"/>
+										</f:facet>
+										 <h:outputText value="#{systemVideoLog.userName}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogSystemVideoLog"
+										actionListener="#{systemVideoLogView.action_edit}">
+										<f:attribute name="selectedSystemVideoLog" value="#{systemVideoLog}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{systemVideoLogView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedSystemVideoLog" value="#{systemVideoLog}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{systemVideoLogView.action_new()}" update=":dialogSystemVideoLog" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogSystemVideoLog" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{systemVideoLogView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelSystemVideoLog" header="SystemVideoLog">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgId" value="Id"/>
+									 <p:inputText id="txtId" binding="#{systemVideoLogView.txtId}">
+									 <p:ajax update=":dialogSystemVideoLog" listener="#{systemVideoLogView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgActionName" value=" ActionName"/>
+									<p:inputText id="txtActionName" disabled="true" binding="#{systemVideoLogView.txtActionName}"/>
+																		<h:outputText id="msgIp" value=" Ip"/>
+									<p:inputText id="txtIp" disabled="true" binding="#{systemVideoLogView.txtIp}"/>
+																		<h:outputText id="msgNote" value=" Note"/>
+									<p:inputText id="txtNote" disabled="true" binding="#{systemVideoLogView.txtNote}"/>
+																		<h:outputText id="msgUserId" value=" UserId"/>
+									<p:inputText id="txtUserId" disabled="true" binding="#{systemVideoLogView.txtUserId}"/>
+																		<h:outputText id="msgUserName" value=" UserName"/>
+									<p:inputText id="txtUserName" disabled="true" binding="#{systemVideoLogView.txtUserName}"/>
+																		
+																													<h:outputText id="msgActionDate" value=" ActionDate"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{systemVideoLogView.txtActionDate}" >
+										<p:ajax event="dateSelect" listener="#{systemVideoLogView.listener_txtActionDate}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{systemVideoLogView.btnSave}" value="Save" action="#{systemVideoLogView.action_save()}" update=":dialogSystemVideoLog :frm:panelDataTableSystemVideoLog" />
+									<p:commandButton id="btnClear" value="Clear" action="#{systemVideoLogView.action_clear()}" update=":dialogSystemVideoLog" />
+									<p:commandButton id="btnExit" value="Exit" action="#{systemVideoLogView.action_closeDialog()}" update=":dialogSystemVideoLog" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

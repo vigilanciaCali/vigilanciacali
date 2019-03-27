@@ -1,0 +1,199 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableMessageBox" header="MessageBoxData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{messageBoxView.data}" var="messageBox"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{messageBox.id}" sortBy="#{messageBox.id}" >
+										 <f:facet name="header">
+										<h:outputText value="id"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.id}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{messageBox.createdAt}" sortBy="#{messageBox.createdAt}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.createdAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.createdBy}" sortBy="#{messageBox.createdBy}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.createdBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.link}" sortBy="#{messageBox.link}" >
+										 <f:facet name="header">
+										<h:outputText value="Link"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.link}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.message}" sortBy="#{messageBox.message}" >
+										 <f:facet name="header">
+										<h:outputText value="Message"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.message}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.pictureLink}" sortBy="#{messageBox.pictureLink}" >
+										 <f:facet name="header">
+										<h:outputText value="PictureLink"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.pictureLink}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.read}" sortBy="#{messageBox.read}" >
+										 <f:facet name="header">
+										<h:outputText value="Read"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.read}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.sent}" sortBy="#{messageBox.sent}" >
+										 <f:facet name="header">
+										<h:outputText value="Sent"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.sent}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.subject}" sortBy="#{messageBox.subject}" >
+										 <f:facet name="header">
+										<h:outputText value="Subject"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.subject}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.updatedAt}" sortBy="#{messageBox.updatedAt}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.updatedAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.updatedBy}" sortBy="#{messageBox.updatedBy}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.updatedBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{messageBox.id_Users}" sortBy="#{messageBox.id_Users}" >
+										 <f:facet name="header">
+										<h:outputText value="Id_Users"/>
+										</f:facet>
+										 <h:outputText value="#{messageBox.id_Users}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogMessageBox"
+										actionListener="#{messageBoxView.action_edit}">
+										<f:attribute name="selectedMessageBox" value="#{messageBox}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{messageBoxView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedMessageBox" value="#{messageBox}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{messageBoxView.action_new()}" update=":dialogMessageBox" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogMessageBox" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{messageBoxView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelMessageBox" header="MessageBox">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgId" value="Id"/>
+									 <p:inputText id="txtId" binding="#{messageBoxView.txtId}">
+									 <p:ajax update=":dialogMessageBox" listener="#{messageBoxView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+									<p:inputText id="txtCreatedBy" disabled="true" binding="#{messageBoxView.txtCreatedBy}"/>
+																		<h:outputText id="msgLink" value=" Link"/>
+									<p:inputText id="txtLink" disabled="true" binding="#{messageBoxView.txtLink}"/>
+																		<h:outputText id="msgMessage" value=" Message"/>
+									<p:inputText id="txtMessage" disabled="true" binding="#{messageBoxView.txtMessage}"/>
+																		<h:outputText id="msgPictureLink" value=" PictureLink"/>
+									<p:inputText id="txtPictureLink" disabled="true" binding="#{messageBoxView.txtPictureLink}"/>
+																		<h:outputText id="msgRead" value=" Read"/>
+									<p:inputText id="txtRead" disabled="true" binding="#{messageBoxView.txtRead}"/>
+																		<h:outputText id="msgSent" value=" Sent"/>
+									<p:inputText id="txtSent" disabled="true" binding="#{messageBoxView.txtSent}"/>
+																		<h:outputText id="msgSubject" value=" Subject"/>
+									<p:inputText id="txtSubject" disabled="true" binding="#{messageBoxView.txtSubject}"/>
+																		<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+									<p:inputText id="txtUpdatedBy" disabled="true" binding="#{messageBoxView.txtUpdatedBy}"/>
+																		<h:outputText id="msgId_Users" value=" Id_Users"/>
+									<p:inputText id="txtId_Users" disabled="true" binding="#{messageBoxView.txtId_Users}"/>
+																		
+																													<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{messageBoxView.txtCreatedAt}" >
+										<p:ajax event="dateSelect" listener="#{messageBoxView.listener_txtCreatedAt}" />
+										</p:calendar>
+																				<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{messageBoxView.txtUpdatedAt}" >
+										<p:ajax event="dateSelect" listener="#{messageBoxView.listener_txtUpdatedAt}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{messageBoxView.btnSave}" value="Save" action="#{messageBoxView.action_save()}" update=":dialogMessageBox :frm:panelDataTableMessageBox" />
+									<p:commandButton id="btnClear" value="Clear" action="#{messageBoxView.action_clear()}" update=":dialogMessageBox" />
+									<p:commandButton id="btnExit" value="Exit" action="#{messageBoxView.action_closeDialog()}" update=":dialogMessageBox" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

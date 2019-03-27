@@ -1,0 +1,253 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableDevice" header="DeviceData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{deviceView.data}" var="device"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{device.id}" sortBy="#{device.id}" >
+										 <f:facet name="header">
+										<h:outputText value="id"/>
+										</f:facet>
+										 <h:outputText value="#{device.id}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{device.active}" sortBy="#{device.active}" >
+										 <f:facet name="header">
+										<h:outputText value="Active"/>
+										</f:facet>
+										 <h:outputText value="#{device.active}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.channelAmount}" sortBy="#{device.channelAmount}" >
+										 <f:facet name="header">
+										<h:outputText value="ChannelAmount"/>
+										</f:facet>
+										 <h:outputText value="#{device.channelAmount}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.createdAt}" sortBy="#{device.createdAt}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{device.createdAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.createdBy}" sortBy="#{device.createdBy}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{device.createdBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.description}" sortBy="#{device.description}" >
+										 <f:facet name="header">
+										<h:outputText value="Description"/>
+										</f:facet>
+										 <h:outputText value="#{device.description}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.ipAddress}" sortBy="#{device.ipAddress}" >
+										 <f:facet name="header">
+										<h:outputText value="IpAddress"/>
+										</f:facet>
+										 <h:outputText value="#{device.ipAddress}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.location}" sortBy="#{device.location}" >
+										 <f:facet name="header">
+										<h:outputText value="Location"/>
+										</f:facet>
+										 <h:outputText value="#{device.location}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.login}" sortBy="#{device.login}" >
+										 <f:facet name="header">
+										<h:outputText value="Login"/>
+										</f:facet>
+										 <h:outputText value="#{device.login}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.manufacturer}" sortBy="#{device.manufacturer}" >
+										 <f:facet name="header">
+										<h:outputText value="Manufacturer"/>
+										</f:facet>
+										 <h:outputText value="#{device.manufacturer}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.model}" sortBy="#{device.model}" >
+										 <f:facet name="header">
+										<h:outputText value="Model"/>
+										</f:facet>
+										 <h:outputText value="#{device.model}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.note}" sortBy="#{device.note}" >
+										 <f:facet name="header">
+										<h:outputText value="Note"/>
+										</f:facet>
+										 <h:outputText value="#{device.note}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.password}" sortBy="#{device.password}" >
+										 <f:facet name="header">
+										<h:outputText value="Password"/>
+										</f:facet>
+										 <h:outputText value="#{device.password}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.port}" sortBy="#{device.port}" >
+										 <f:facet name="header">
+										<h:outputText value="Port"/>
+										</f:facet>
+										 <h:outputText value="#{device.port}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.serialNumber}" sortBy="#{device.serialNumber}" >
+										 <f:facet name="header">
+										<h:outputText value="SerialNumber"/>
+										</f:facet>
+										 <h:outputText value="#{device.serialNumber}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.type}" sortBy="#{device.type}" >
+										 <f:facet name="header">
+										<h:outputText value="Type"/>
+										</f:facet>
+										 <h:outputText value="#{device.type}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.updatedAt}" sortBy="#{device.updatedAt}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{device.updatedAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{device.updatedBy}" sortBy="#{device.updatedBy}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{device.updatedBy}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogDevice"
+										actionListener="#{deviceView.action_edit}">
+										<f:attribute name="selectedDevice" value="#{device}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{deviceView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedDevice" value="#{device}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{deviceView.action_new()}" update=":dialogDevice" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogDevice" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{deviceView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelDevice" header="Device">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgId" value="Id"/>
+									 <p:inputText id="txtId" binding="#{deviceView.txtId}">
+									 <p:ajax update=":dialogDevice" listener="#{deviceView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgActive" value=" Active"/>
+									<p:inputText id="txtActive" disabled="true" binding="#{deviceView.txtActive}"/>
+																		<h:outputText id="msgChannelAmount" value=" ChannelAmount"/>
+									<p:inputText id="txtChannelAmount" disabled="true" binding="#{deviceView.txtChannelAmount}"/>
+																		<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+									<p:inputText id="txtCreatedBy" disabled="true" binding="#{deviceView.txtCreatedBy}"/>
+																		<h:outputText id="msgDescription" value=" Description"/>
+									<p:inputText id="txtDescription" disabled="true" binding="#{deviceView.txtDescription}"/>
+																		<h:outputText id="msgIpAddress" value=" IpAddress"/>
+									<p:inputText id="txtIpAddress" disabled="true" binding="#{deviceView.txtIpAddress}"/>
+																		<h:outputText id="msgLocation" value=" Location"/>
+									<p:inputText id="txtLocation" disabled="true" binding="#{deviceView.txtLocation}"/>
+																		<h:outputText id="msgLogin" value=" Login"/>
+									<p:inputText id="txtLogin" disabled="true" binding="#{deviceView.txtLogin}"/>
+																		<h:outputText id="msgManufacturer" value=" Manufacturer"/>
+									<p:inputText id="txtManufacturer" disabled="true" binding="#{deviceView.txtManufacturer}"/>
+																		<h:outputText id="msgModel" value=" Model"/>
+									<p:inputText id="txtModel" disabled="true" binding="#{deviceView.txtModel}"/>
+																		<h:outputText id="msgNote" value=" Note"/>
+									<p:inputText id="txtNote" disabled="true" binding="#{deviceView.txtNote}"/>
+																		<h:outputText id="msgPassword" value=" Password"/>
+									<p:inputText id="txtPassword" disabled="true" binding="#{deviceView.txtPassword}"/>
+																		<h:outputText id="msgPort" value=" Port"/>
+									<p:inputText id="txtPort" disabled="true" binding="#{deviceView.txtPort}"/>
+																		<h:outputText id="msgSerialNumber" value=" SerialNumber"/>
+									<p:inputText id="txtSerialNumber" disabled="true" binding="#{deviceView.txtSerialNumber}"/>
+																		<h:outputText id="msgType" value=" Type"/>
+									<p:inputText id="txtType" disabled="true" binding="#{deviceView.txtType}"/>
+																		<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+									<p:inputText id="txtUpdatedBy" disabled="true" binding="#{deviceView.txtUpdatedBy}"/>
+																		
+																													<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{deviceView.txtCreatedAt}" >
+										<p:ajax event="dateSelect" listener="#{deviceView.listener_txtCreatedAt}" />
+										</p:calendar>
+																				<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{deviceView.txtUpdatedAt}" >
+										<p:ajax event="dateSelect" listener="#{deviceView.listener_txtUpdatedAt}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{deviceView.btnSave}" value="Save" action="#{deviceView.action_save()}" update=":dialogDevice :frm:panelDataTableDevice" />
+									<p:commandButton id="btnClear" value="Clear" action="#{deviceView.action_clear()}" update=":dialogDevice" />
+									<p:commandButton id="btnExit" value="Exit" action="#{deviceView.action_closeDialog()}" update=":dialogDevice" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

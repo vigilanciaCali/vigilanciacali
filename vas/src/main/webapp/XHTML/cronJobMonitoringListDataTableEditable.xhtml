@@ -1,0 +1,313 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+	    <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+		 
+		 <h:form id="form">
+			
+			 
+			<p:panel id="msgProjectClientesTitle" header="CronJobMonitoringData">
+					<p:messages id="msg" />
+				<p:dataTable id ="tabla" value="#{cronJobMonitoringView.data}" var="cronJobMonitoring"
+					paginator="true" rows="5"  editable="true" >
+					 
+					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{cronJobMonitoringView.rowEventListener}" />
+					
+															<p:column filterBy="#{cronJobMonitoring.id}" sortBy="#{cronJobMonitoring.id}" headerText="id">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{cronJobMonitoring.id}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{cronJobMonitoring.id}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    										
+											
+						<p:column filterBy="#{cronJobMonitoring.active}" sortBy="#{cronJobMonitoring.active}" 
+							headerText="active">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.active}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.active}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.args}" sortBy="#{cronJobMonitoring.args}" 
+							headerText="args">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.args}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.args}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.code}" sortBy="#{cronJobMonitoring.code}" 
+							headerText="code">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.code}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.code}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.createdBy}" sortBy="#{cronJobMonitoring.createdBy}" 
+							headerText="createdBy">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.createdBy}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.createdBy}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.description}" sortBy="#{cronJobMonitoring.description}" 
+							headerText="description">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.description}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.description}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.function}" sortBy="#{cronJobMonitoring.function}" 
+							headerText="function">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.function}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.function}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.intervalNumber}" sortBy="#{cronJobMonitoring.intervalNumber}" 
+							headerText="intervalNumber">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.intervalNumber}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.intervalNumber}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.intervalType}" sortBy="#{cronJobMonitoring.intervalType}" 
+							headerText="intervalType">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.intervalType}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.intervalType}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.numbercall}" sortBy="#{cronJobMonitoring.numbercall}" 
+							headerText="numbercall">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.numbercall}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.numbercall}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.priority}" sortBy="#{cronJobMonitoring.priority}" 
+							headerText="priority">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.priority}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.priority}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{cronJobMonitoring.updatedBy}" sortBy="#{cronJobMonitoring.updatedBy}" 
+							headerText="updatedBy">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.updatedBy}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{cronJobMonitoring.updatedBy}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+										
+										   						 
+						 <p:column filterBy="#{cronJobMonitoring.createdAt}" sortBy="#{cronJobMonitoring.createdAt}" 
+							headerText="createdAt">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.createdAt}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{cronJobMonitoring.createdAt}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{cronJobMonitoringView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{cronJobMonitoring.nextcall}" sortBy="#{cronJobMonitoring.nextcall}" 
+							headerText="nextcall">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.nextcall}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{cronJobMonitoring.nextcall}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{cronJobMonitoringView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{cronJobMonitoring.updatedAt}" sortBy="#{cronJobMonitoring.updatedAt}" 
+							headerText="updatedAt">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{cronJobMonitoring.updatedAt}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{cronJobMonitoring.updatedAt}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{cronJobMonitoringView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   											
+					<p:column headerText="Options" >
+						<p:rowEditor id="row"/>
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
+						<p:commandButton id="btnDelete" actionListener="#{cronJobMonitoringView.actionDeleteDataTableEditable}" title="Delete" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" icon="ui-icon-trash" update=":form:msg,:form:tabla" >
+							<f:attribute name="selectedCronJobMonitoring" value="#{cronJobMonitoring}" />  
+						</p:commandButton>
+						
+					</p:column>	
+				
+				</p:dataTable>	
+					
+				
+			</p:panel>
+				
+	   </h:form>
+		 </f:view>
+			</ui:define>		
+		</ui:composition>	
+	
+	</h:body>	
+	
+</html>	
