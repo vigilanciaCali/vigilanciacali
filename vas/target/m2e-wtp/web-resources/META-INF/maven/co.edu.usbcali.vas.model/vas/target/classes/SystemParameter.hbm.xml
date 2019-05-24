@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 10, 2018 8:14:55 PM by Hibernate Tools 5.1.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.vas.model.SystemParameter" table="system_parameter" schema="public" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="code" type="java.lang.String">
+            <column name="code" not-null="true" />
+        </property>
+        <property name="textValue" type="java.lang.String">
+            <column name="text_value" />
+        </property>
+        <property name="intValue" type="java.lang.Integer">
+            <column name="int_value" />
+        </property>
+        <property name="doubleValue" type="java.lang.Long">
+            <column name="double_value" precision="131089" scale="0" />
+        </property>
+        <property name="dateValue" type="java.util.Date">
+            <column name="date_value" length="13" />
+        </property>
+        <property name="timeValue" type="java.util.Date">
+            <column name="time_value" length="29" />
+        </property>
+        <property name="booleanValue" type="java.lang.Boolean">
+            <column name="boolean_value" />
+        </property>
+        <property name="createdAt" type="java.util.Date">
+            <column name="created_at" length="29" not-null="true" />
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <column name="updated_at" length="29" />
+        </property>
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" not-null="true" />
+        </property>
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" />
+        </property>
+    </class>
+</hibernate-mapping>
