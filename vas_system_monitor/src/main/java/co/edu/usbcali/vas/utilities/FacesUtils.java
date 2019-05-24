@@ -38,8 +38,6 @@ import java.util.Date;
 import java.sql.Blob;
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.primefaces.context.RequestContext;
-
 import co.edu.usbcali.vas.exceptions.ZMessManager;
 
 import javax.faces.FactoryFinder;
@@ -489,23 +487,7 @@ public class FacesUtils {
 		return blob;
 		
 	}
-	
-	//DIALOGOS---------------------------------------------------------------------------------------
-	
-	public static void showDialog(String nameDialog) throws Exception{
-		RequestContext requestContext = RequestContext.getCurrentInstance();  
-		requestContext.execute("PF('" + nameDialog +"').show()");
-	}
-	
-	public static void hideDialog(String nameDialog) throws Exception{
-		RequestContext requestContext = RequestContext.getCurrentInstance();  
-		requestContext.execute("PF('" + nameDialog +"').hide()");
-	}
-	
-	public static void update(String idComponenteToUpdate){
-		RequestContext requestContext = RequestContext.getCurrentInstance();  
-		requestContext.update("@([id$="+idComponenteToUpdate+"])");
-	}
+
 	
 	//IP CLIENTE
 	public static String getIpClient(){
