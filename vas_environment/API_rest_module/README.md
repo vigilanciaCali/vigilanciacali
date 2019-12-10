@@ -51,15 +51,15 @@ La disponibilidad del algoritmo, true si está disponible y false si el algoritm
 http://localhost:5000/anomalyDetetectionState
 
 #### CONTENIDO Y VERSIONES
-```
-anomaly_detection_execute.sh
-API_REST.py
-c3d_feature_execute.sh
-callback_tracking.m
-executing_tracking.sh
-includes.py
-includes.pyc
-list
-virtual_env.sh
-water_mark_execute.sh
-```
+
+- anomaly_detection_execute.sh<br/>
+- API_REST.py<br/>
+- c3d_feature_execute.sh<br/>
+- callback_tracking.m<br/>
+- executing_tracking.sh<br/>
+- includes.py<br/>
+- includes.pyc<br/>
+- list<br/>
+- virtual_env.sh<br/>
+- water_mark_execute.sh<br/>
+
