@@ -79,7 +79,7 @@ sh feature_extraction.sh
 ```
 Cuando la ejecución termina las características son almacenadas en la ruta "./output".
 
-NOTA: Este modulo es automáticamente llamado por el API rest cuando recibe un POST para ejecutar el algoritmo de detección de actividades anómalas.
+**NOTA**: Este modulo es automáticamente llamado por el API rest cuando recibe un POST para ejecutar el algoritmo de detección de actividades anómalas.
 
 #### CONTENIDO Y VERSIONES
 
