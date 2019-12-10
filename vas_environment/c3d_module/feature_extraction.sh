@@ -1,0 +1,2 @@
+mkdir -p ./output/video_input/video
+GLOG_logtosterr=1 /home/javeriana/carpeta_roger/librerias/C3D/C3D-v1.0/build/tools/extract_image_features.bin prototxt/c3d_sport1m_feature_extractor_video.prototxt prototxt/conv3d_deepnetA_sport1m_iter_1900000 0 50 1 prototxt/output_list_video_prefix.txt fc6-1
