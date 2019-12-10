@@ -24,8 +24,8 @@ Roger Figueroa Quintero - roger.figueroa@javerianacali.edu.co
 
 #### TECNOLOGÍA Y DEPENDENCIAS
 
-flask 1.0.2
-requests 2.21.0
+- flask 1.0.2<br/>
+- requests 2.21.0<br/>
 
 #### INSTALACIÓN Y COMPILACIÓN
 
