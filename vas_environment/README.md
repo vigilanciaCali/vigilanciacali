@@ -20,11 +20,11 @@ Roger Figueroa Quintero - roger.figueroa@javerianacali.edu.co
 
 #### TECNOLOGÍA Y DEPENDENCIAS
 
--Matlab R2018a<br/>
--Ubuntu 16.04.6<br/>
--python 3.5.2<br/>
--numpy 1.15.4<br/>
--opencv 3.4.3<br/>
+- Matlab R2018a<br/>
+- Ubuntu 16.04.6<br/>
+- python 3.5.2<br/>
+- numpy 1.15.4<br/>
+- opencv 3.4.3<br/>
 
 #### INSTALACIÓN Y COMPILACIÓN
 
