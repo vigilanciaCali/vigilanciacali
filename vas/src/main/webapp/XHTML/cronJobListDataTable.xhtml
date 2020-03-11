@@ -1,0 +1,229 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableCronJob" header="CronJobData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{cronJobView.data}" var="cronJob"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{cronJob.id}" sortBy="#{cronJob.id}" >
+										 <f:facet name="header">
+										<h:outputText value="id"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.id}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{cronJob.active}" sortBy="#{cronJob.active}" >
+										 <f:facet name="header">
+										<h:outputText value="Active"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.active}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.args}" sortBy="#{cronJob.args}" >
+										 <f:facet name="header">
+										<h:outputText value="Args"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.args}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.code}" sortBy="#{cronJob.code}" >
+										 <f:facet name="header">
+										<h:outputText value="Code"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.code}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.createdAt}" sortBy="#{cronJob.createdAt}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.createdAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.createdBy}" sortBy="#{cronJob.createdBy}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.createdBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.description}" sortBy="#{cronJob.description}" >
+										 <f:facet name="header">
+										<h:outputText value="Description"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.description}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.function}" sortBy="#{cronJob.function}" >
+										 <f:facet name="header">
+										<h:outputText value="Function"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.function}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.intervalNumber}" sortBy="#{cronJob.intervalNumber}" >
+										 <f:facet name="header">
+										<h:outputText value="IntervalNumber"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.intervalNumber}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.intervalType}" sortBy="#{cronJob.intervalType}" >
+										 <f:facet name="header">
+										<h:outputText value="IntervalType"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.intervalType}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.nextcall}" sortBy="#{cronJob.nextcall}" >
+										 <f:facet name="header">
+										<h:outputText value="Nextcall"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.nextcall}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.numbercall}" sortBy="#{cronJob.numbercall}" >
+										 <f:facet name="header">
+										<h:outputText value="Numbercall"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.numbercall}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.priority}" sortBy="#{cronJob.priority}" >
+										 <f:facet name="header">
+										<h:outputText value="Priority"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.priority}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.updatedAt}" sortBy="#{cronJob.updatedAt}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.updatedAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{cronJob.updatedBy}" sortBy="#{cronJob.updatedBy}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{cronJob.updatedBy}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogCronJob"
+										actionListener="#{cronJobView.action_edit}">
+										<f:attribute name="selectedCronJob" value="#{cronJob}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{cronJobView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedCronJob" value="#{cronJob}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{cronJobView.action_new()}" update=":dialogCronJob" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogCronJob" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{cronJobView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelCronJob" header="CronJob">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgId" value="Id"/>
+									 <p:inputText id="txtId" binding="#{cronJobView.txtId}">
+									 <p:ajax update=":dialogCronJob" listener="#{cronJobView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgActive" value=" Active"/>
+									<p:inputText id="txtActive" disabled="true" binding="#{cronJobView.txtActive}"/>
+																		<h:outputText id="msgArgs" value=" Args"/>
+									<p:inputText id="txtArgs" disabled="true" binding="#{cronJobView.txtArgs}"/>
+																		<h:outputText id="msgCode" value=" Code"/>
+									<p:inputText id="txtCode" disabled="true" binding="#{cronJobView.txtCode}"/>
+																		<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+									<p:inputText id="txtCreatedBy" disabled="true" binding="#{cronJobView.txtCreatedBy}"/>
+																		<h:outputText id="msgDescription" value=" Description"/>
+									<p:inputText id="txtDescription" disabled="true" binding="#{cronJobView.txtDescription}"/>
+																		<h:outputText id="msgFunction" value=" Function"/>
+									<p:inputText id="txtFunction" disabled="true" binding="#{cronJobView.txtFunction}"/>
+																		<h:outputText id="msgIntervalNumber" value=" IntervalNumber"/>
+									<p:inputText id="txtIntervalNumber" disabled="true" binding="#{cronJobView.txtIntervalNumber}"/>
+																		<h:outputText id="msgIntervalType" value=" IntervalType"/>
+									<p:inputText id="txtIntervalType" disabled="true" binding="#{cronJobView.txtIntervalType}"/>
+																		<h:outputText id="msgNumbercall" value=" Numbercall"/>
+									<p:inputText id="txtNumbercall" disabled="true" binding="#{cronJobView.txtNumbercall}"/>
+																		<h:outputText id="msgPriority" value=" Priority"/>
+									<p:inputText id="txtPriority" disabled="true" binding="#{cronJobView.txtPriority}"/>
+																		<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+									<p:inputText id="txtUpdatedBy" disabled="true" binding="#{cronJobView.txtUpdatedBy}"/>
+																		
+																													<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{cronJobView.txtCreatedAt}" >
+										<p:ajax event="dateSelect" listener="#{cronJobView.listener_txtCreatedAt}" />
+										</p:calendar>
+																				<h:outputText id="msgNextcall" value=" Nextcall"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{cronJobView.txtNextcall}" >
+										<p:ajax event="dateSelect" listener="#{cronJobView.listener_txtNextcall}" />
+										</p:calendar>
+																				<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{cronJobView.txtUpdatedAt}" >
+										<p:ajax event="dateSelect" listener="#{cronJobView.listener_txtUpdatedAt}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{cronJobView.btnSave}" value="Save" action="#{cronJobView.action_save()}" update=":dialogCronJob :frm:panelDataTableCronJob" />
+									<p:commandButton id="btnClear" value="Clear" action="#{cronJobView.action_clear()}" update=":dialogCronJob" />
+									<p:commandButton id="btnExit" value="Exit" action="#{cronJobView.action_closeDialog()}" update=":dialogCronJob" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

@@ -1,0 +1,244 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableSystemCompanyParameter" header="SystemCompanyParameterData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{systemCompanyParameterView.data}" var="systemCompanyParameter"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{systemCompanyParameter.id}" sortBy="#{systemCompanyParameter.id}" >
+										 <f:facet name="header">
+										<h:outputText value="id"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.id}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{systemCompanyParameter.code}" sortBy="#{systemCompanyParameter.code}" >
+										 <f:facet name="header">
+										<h:outputText value="Code"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.code}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyAddress}" sortBy="#{systemCompanyParameter.companyAddress}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyAddress"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyAddress}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyEmail}" sortBy="#{systemCompanyParameter.companyEmail}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyEmail"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyEmail}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyLogoUrl}" sortBy="#{systemCompanyParameter.companyLogoUrl}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyLogoUrl"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyLogoUrl}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyName}" sortBy="#{systemCompanyParameter.companyName}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyName"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyName}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyNit}" sortBy="#{systemCompanyParameter.companyNit}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyNit"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyNit}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyPhone}" sortBy="#{systemCompanyParameter.companyPhone}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyPhone"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyPhone}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.companyWeb}" sortBy="#{systemCompanyParameter.companyWeb}" >
+										 <f:facet name="header">
+										<h:outputText value="CompanyWeb"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.companyWeb}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.createdAt}" sortBy="#{systemCompanyParameter.createdAt}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.createdAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.createdBy}" sortBy="#{systemCompanyParameter.createdBy}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.createdBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.systemLogoUrl}" sortBy="#{systemCompanyParameter.systemLogoUrl}" >
+										 <f:facet name="header">
+										<h:outputText value="SystemLogoUrl"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.systemLogoUrl}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.systemName}" sortBy="#{systemCompanyParameter.systemName}" >
+										 <f:facet name="header">
+										<h:outputText value="SystemName"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.systemName}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.systemUrl}" sortBy="#{systemCompanyParameter.systemUrl}" >
+										 <f:facet name="header">
+										<h:outputText value="SystemUrl"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.systemUrl}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.systemVersion}" sortBy="#{systemCompanyParameter.systemVersion}" >
+										 <f:facet name="header">
+										<h:outputText value="SystemVersion"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.systemVersion}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.updatedAt}" sortBy="#{systemCompanyParameter.updatedAt}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.updatedAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{systemCompanyParameter.updatedBy}" sortBy="#{systemCompanyParameter.updatedBy}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{systemCompanyParameter.updatedBy}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogSystemCompanyParameter"
+										actionListener="#{systemCompanyParameterView.action_edit}">
+										<f:attribute name="selectedSystemCompanyParameter" value="#{systemCompanyParameter}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{systemCompanyParameterView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedSystemCompanyParameter" value="#{systemCompanyParameter}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{systemCompanyParameterView.action_new()}" update=":dialogSystemCompanyParameter" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogSystemCompanyParameter" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{systemCompanyParameterView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelSystemCompanyParameter" header="SystemCompanyParameter">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgId" value="Id"/>
+									 <p:inputText id="txtId" binding="#{systemCompanyParameterView.txtId}">
+									 <p:ajax update=":dialogSystemCompanyParameter" listener="#{systemCompanyParameterView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCode" value=" Code"/>
+									<p:inputText id="txtCode" disabled="true" binding="#{systemCompanyParameterView.txtCode}"/>
+																		<h:outputText id="msgCompanyAddress" value=" CompanyAddress"/>
+									<p:inputText id="txtCompanyAddress" disabled="true" binding="#{systemCompanyParameterView.txtCompanyAddress}"/>
+																		<h:outputText id="msgCompanyEmail" value=" CompanyEmail"/>
+									<p:inputText id="txtCompanyEmail" disabled="true" binding="#{systemCompanyParameterView.txtCompanyEmail}"/>
+																		<h:outputText id="msgCompanyLogoUrl" value=" CompanyLogoUrl"/>
+									<p:inputText id="txtCompanyLogoUrl" disabled="true" binding="#{systemCompanyParameterView.txtCompanyLogoUrl}"/>
+																		<h:outputText id="msgCompanyName" value=" CompanyName"/>
+									<p:inputText id="txtCompanyName" disabled="true" binding="#{systemCompanyParameterView.txtCompanyName}"/>
+																		<h:outputText id="msgCompanyNit" value=" CompanyNit"/>
+									<p:inputText id="txtCompanyNit" disabled="true" binding="#{systemCompanyParameterView.txtCompanyNit}"/>
+																		<h:outputText id="msgCompanyPhone" value=" CompanyPhone"/>
+									<p:inputText id="txtCompanyPhone" disabled="true" binding="#{systemCompanyParameterView.txtCompanyPhone}"/>
+																		<h:outputText id="msgCompanyWeb" value=" CompanyWeb"/>
+									<p:inputText id="txtCompanyWeb" disabled="true" binding="#{systemCompanyParameterView.txtCompanyWeb}"/>
+																		<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+									<p:inputText id="txtCreatedBy" disabled="true" binding="#{systemCompanyParameterView.txtCreatedBy}"/>
+																		<h:outputText id="msgSystemLogoUrl" value=" SystemLogoUrl"/>
+									<p:inputText id="txtSystemLogoUrl" disabled="true" binding="#{systemCompanyParameterView.txtSystemLogoUrl}"/>
+																		<h:outputText id="msgSystemName" value=" SystemName"/>
+									<p:inputText id="txtSystemName" disabled="true" binding="#{systemCompanyParameterView.txtSystemName}"/>
+																		<h:outputText id="msgSystemUrl" value=" SystemUrl"/>
+									<p:inputText id="txtSystemUrl" disabled="true" binding="#{systemCompanyParameterView.txtSystemUrl}"/>
+																		<h:outputText id="msgSystemVersion" value=" SystemVersion"/>
+									<p:inputText id="txtSystemVersion" disabled="true" binding="#{systemCompanyParameterView.txtSystemVersion}"/>
+																		<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+									<p:inputText id="txtUpdatedBy" disabled="true" binding="#{systemCompanyParameterView.txtUpdatedBy}"/>
+																		
+																													<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{systemCompanyParameterView.txtCreatedAt}" >
+										<p:ajax event="dateSelect" listener="#{systemCompanyParameterView.listener_txtCreatedAt}" />
+										</p:calendar>
+																				<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{systemCompanyParameterView.txtUpdatedAt}" >
+										<p:ajax event="dateSelect" listener="#{systemCompanyParameterView.listener_txtUpdatedAt}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{systemCompanyParameterView.btnSave}" value="Save" action="#{systemCompanyParameterView.action_save()}" update=":dialogSystemCompanyParameter :frm:panelDataTableSystemCompanyParameter" />
+									<p:commandButton id="btnClear" value="Clear" action="#{systemCompanyParameterView.action_clear()}" update=":dialogSystemCompanyParameter" />
+									<p:commandButton id="btnExit" value="Exit" action="#{systemCompanyParameterView.action_closeDialog()}" update=":dialogSystemCompanyParameter" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

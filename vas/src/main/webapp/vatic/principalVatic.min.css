@@ -1,0 +1,26 @@
+.output{font-family:monospace;
+		font-weight:700}
+#doodle{position:relative;
+		width:0;
+		height:0;
+		z-index:2}
+#canvas{
+		position:absolute;
+		width:100%;
+		height:100%;
+		z-index:1}
+.bbox{border:1px solid red;position:absolute;z-index:3}
+.handle,.ui-resizable-handle{border-radius:50%;position:absolute}
+.center-drag{left:50%;top:50%;transform:translate(-50%,-50%);cursor:move}
+.ui-resizable-n{left:50%;transform:translate(-50%,-50%);cursor:n-resize}
+.ui-resizable-s{left:50%;bottom:0;transform:translate(-50%,50%);cursor:s-resize}
+.ui-resizable-w{top:50%;transform:translate(-50%,-50%);cursor:w-resize}
+.ui-resizable-e{right:0;top:50%;transform:translate(50%,-50%);cursor:e-resize}
+.ui-slider{position:relative;text-align:left;height:.8em}
+.ui-slider-handle{position:absolute;z-index:2;width:1.2em;height:1.2em;cursor:default;-ms-touch-action:none;touch-action:none;top:-.3em;margin-left:-.6em}
+.ui-widget.ui-widget-content{border:1px solid #d3d3d3}
+.ui-state-default{border:1px solid #d3d3d3;background-color:#e6e6e6}
+.ui-state-focus,.ui-state-hover{border:1px solid #999;background-color:#dadada}
+.ui-state-active{border:1px solid #aaa;background-color:#fff}
+.ui-state-disabled{opacity:.35}
+.ui-corner-all{border-radius:4px}

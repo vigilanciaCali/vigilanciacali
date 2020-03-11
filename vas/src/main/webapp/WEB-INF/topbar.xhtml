@@ -1,0 +1,46 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/apollo">
+
+    <div class="topbar clearfix">
+    	
+    	<a href="index.xhtml" style="color: white; font-size: 20px;">Video Analytic Project</a>
+        
+        
+        <a id="menu-button" href="#">
+            <i class="fa fa-align-left"></i>
+        </a>
+    
+		<a href="#" class="profile" title="Mi cuenta">
+			<span class="username">#{menuView.txtName}</span>
+            <span class="fa fa-user" style="font-size: 40px;"/>
+            <i class="fa fa-angle-down"></i>
+            
+        </a>
+         
+        <ul class="topbar-menu fadeInDown">
+            <li>
+                 <p:commandLink title="Mi Cuenta" onclick="location.href='account.xhtml'">	
+						<i class="fa fa-user"></i>
+						<span>Mi cuenta</span>
+				</p:commandLink>
+				
+				<p:commandLink type="button" action="#{loginView.closeSession()}" >
+					<i class="fa fa-sign-out"></i>
+                        <span> Salir</span> 
+                </p:commandLink>
+	
+
+            </li>
+            
+        </ul>
+
+        
+        
+    </div>
+
+</ui:composition>

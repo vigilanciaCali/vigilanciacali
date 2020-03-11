@@ -1,0 +1,239 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="frmusers" enctype="multipart/form-data">
+			<p:growl id="growl" life="3000">
+				<p:autoUpdate />
+			</p:growl>
+				<div class="ui-g">
+
+				<div class="ui-g-12 ui-md-4">
+					<!-- *********************** HEADER*************************** -->
+					<h3 class="header_title">
+						<span class="fa fa-wrench" style="font-size: 40px;"/> SISTEMA /<small> <span
+							class="fa fa-clock-o" style="font-size: 20px;"/> Usuarios
+						</small>
+					</h3>
+				</div>
+				
+				<!-- **********************ACTIONS**************************** -->
+				<div class="ui-g-12 ui-md-12" align="center">
+
+					<p:commandButton type="button" icon="ui-icon-add"
+						title="Nuevo Usuario"
+						onclick="PF('dlgUser').show();" />
+
+					<p:spacer width="10px" />
+
+					<p:commandButton id="btnLimpiarHeader" title="Refrescar"
+						icon="ui-icon-sync"
+						action="#{usersView.action_clear}" update=":frmusers" />
+
+					<p:spacer width="10px" />
+					
+					<p:commandButton ajax="false" icon="fa fa-file-excel-o"
+						title="Exportar a Excel">
+						<p:dataExporter type="xls" target="listausersDataTable"
+							fileName="ReporteUsuarios" />
+					</p:commandButton>
+
+				</div>
+
+				<!-- **********************DATA**************************** -->
+			<div class="ui-g-12">
+		
+						<p:dataTable id="listausersDataTable"
+							style="text-align: center; font-size: 14px;" 
+							var="user"
+							value="#{usersView.listUsersDTOs}"
+							selection="#{usersView.selectedUsersDTO}"
+							selectionMode="single" rowKey="#{user.id}" 
+							paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
+							resizableColumns="true" liveResize="true" reflow="true"
+							filterDelay="1200"
+							widgetVar="usersTable"
+							emptyMessage="No se encontraron registros en el sistema"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:ajax event="rowSelect"
+								listener="#{usersView.listener_selected_entity}"
+								update=":frmusers"
+								oncomplete="PF('dlgUser').show();" />
+								
+							<f:facet name="header">
+							<div class="row">
+								<div class="col-md-6" align="left">
+									<h:outputText value="Búscar: " />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('usersTable').filter()" style="width:150px;"
+										placeholder="Introduzca el texto" />
+								</div>
+
+							</div>
+						</f:facet>
+
+
+							<p:column headerText="Nombre" filterBy="#{user.firstname}" filterMatchMode="contains" 
+										sortBy="#{user.firstname}">
+								<h:outputText value="#{user.firstname}" />
+							</p:column>
+
+							<p:column headerText="Login" filterBy="#{user.login}" filterMatchMode="contains"
+										sortBy="#{user.login}" >
+								<h:outputText value="#{user.login}" />
+							</p:column>
+							
+							<p:column headerText="Tipo" filterBy="#{user.userType}" filterMatchMode="exact"
+										sortBy="#{user.userType}" >
+								<f:facet name="filter">
+									<p:selectOneMenu onchange="PF('usersTable').filter()">
+										<f:selectItem itemLabel="Todos" itemValue="#{null}"
+											noSelectionOption="true" />
+										<f:selectItems value="#{usersView.itemsTypeFilter}" />
+									</p:selectOneMenu>
+								</f:facet>
+								<h:outputText value="#{user.userType}" />
+							</p:column>
+
+							<p:column headerText="Fecha Creación" filterBy="#{user.createdAt}" filterMatchMode="contains"
+										sortBy="#{user.createdAt}" >
+								<h:outputText value="#{user.createdAt}">
+									<f:convertDateTime type="date" pattern="yyyy-MM-dd" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Activo" filterBy="#{user.active}" filterMatchMode="exact"
+										sortBy="#{user.active}">
+								<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('usersTable').filter()">
+										<f:selectItem itemLabel="Todos" itemValue="#{null}"
+											noSelectionOption="true" />
+										<f:selectItem itemLabel="SI" itemValue="TRUE" />
+										<f:selectItem itemLabel="NO" itemValue="FALSE" />
+								</p:selectOneMenu>
+								</f:facet>
+								<h:outputText value="#{(user.active == 'TRUE' ? 'SI' : 'NO')}" />
+							</p:column>
+							
+							<p:column style="width:36px" exportable="false">
+	           					<p:rowEditor/>
+	       					</p:column>
+
+						</p:dataTable>
+
+					<!-- **********************DIÁLOGO GESTIÓN user**************************** -->
+				</div>
+					<p:dialog id="dlgUser" 
+						header="Gestión Usuarios"
+						widgetVar="dlgUser" 
+						modal="true" 
+						draggable="true"
+						closable="false"
+						resizable="true"
+						responsive="true">
+
+						<p:messages id="message" closable="true" style="width: 100%;" >
+							<p:autoUpdate />
+						</p:messages>
+							
+						<p:tabView>
+							<p:tab title="General">
+
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Nombres:" for="txtFirstname" />
+							<p:inputText id="txtFirstname"
+								binding="#{usersView.txtFirstname}" maxlength="100" />
+
+							<p:outputLabel value="Apellidos:" for="txtLastname" />
+							<p:inputText id="txtLastname"
+								binding="#{usersView.txtLastname}" maxlength="100" />
+							
+							<p:outputLabel value="Login:" for="txtLogin" />
+							<p:inputText id="txtLogin"
+								binding="#{usersView.txtLogin}" placeholder="user@mail.com" maxlength="100" />
+
+							<p:outputLabel value="Tipo user:" for="somUsuTipo" />
+							<p:selectOneMenu id="somUsuTipo"
+								binding="#{usersView.somUserType}" filter="true">
+								<f:selectItem itemLabel="- Seleccionar -" itemValue="-1" />
+								<f:selectItems value="#{usersView.itemsUserType}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Contraseña:" for="txtPassword" />
+							<p:password id="txtPassword" feedback="true" placeholder="Contraseña"
+								binding="#{usersView.txtPassword}"
+								disabled="false" maxlength="32" />
+
+							<p:outputLabel value="Confirmar Contraseña:"
+								for="txtValidatePassword" />
+							<p:password id="txtValidatePassword" placeholder="Confirmar Contraseña"
+								binding="#{usersView.txtValidatePassword}"
+								disabled="false" maxlength="32" />
+
+						</h:panelGrid>
+						</p:tab>
+						
+						<p:tab title="Estado">
+								<h:panelGrid columns="2">
+								
+								<p:outputLabel value="Activo:" for="somUserActive" />
+									<p:selectOneMenu id="somUserActive" binding="#{usersView.somUserActive}"> 
+										<f:selectItem itemLabel="SI" itemValue="TRUE" />
+										<f:selectItem itemLabel="NO" itemValue="FALSE" />
+									</p:selectOneMenu>
+									
+								<h:outputText id="msgObservaciones" value=" Observaciones:" />
+									<p:inputTextarea id="txtNote"
+										binding="#{usersView.txtNote}" maxlength="255"/>
+														
+								</h:panelGrid>
+
+						</p:tab>
+						
+						<p:tab title="Auditoría">
+								<h:panelGrid columns="2">
+									
+									<p:outputLabel for="txtCreatedAt" value="Fecha Creación" />
+        							<p:calendar id="txtCreatedAt" binding="#{usersView.txtCreatedAt}" 
+        										pattern="dd-MM-yyyy - HH:mm" disabled="true"/>
+        
+									<h:outputText id="msgusercrea" value="Creado Por" />
+									<p:inputText id="txtCreatedBy" disabled="true"
+										binding="#{usersView.txtCreatedBy}" />
+									
+									<p:outputLabel for="txtUpdatedAt" value="Fecha Modificación" />
+        							<p:calendar id="txtUpdatedAt" binding="#{usersView.txtUpdatedAt}" 
+        										pattern="dd-MM-yyyy - HH:mm" disabled="true"/>
+						
+									<h:outputText id="msgusermodifica" value="Modificado Por" />
+									<p:inputText id="txtUpdatedBy" disabled="true"
+										binding="#{usersView.txtUpdatedBy}" />
+								
+								</h:panelGrid>
+
+						</p:tab>
+
+						</p:tabView>
+
+						<br />
+						
+						<div align="center">
+						<p:commandButton id="btnGuardar" value="Guardar" icon="ui-icon-save" 
+							action="#{usersView.action_save()}" update=":frmusers" />
+							
+							<p:spacer width="10px;" />
+						
+						<p:commandButton id="btnCerrar" value="Salir" icon="ui-icon-close"
+							action="#{usersView.action_clear()}" update=":frmusers" />
+						</div>
+					</p:dialog>
+
+				
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

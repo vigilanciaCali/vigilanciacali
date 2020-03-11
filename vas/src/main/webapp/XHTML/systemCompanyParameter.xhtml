@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>		
+	
+	<h:body>
+		<ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		<ui:define name="body">	
+		<f:view>
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+			<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   				<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+			</p:dialog>
+			
+			<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+			
+			
+			<h:form id="formDialog">
+				<p:messages id="msg" />
+				<p:growl id="men"/>
+					<p:panel id="panelSystemCompanyParameter" header="SystemCompanyParameter">							
+						<h:panelGrid columns="2" id="panelGrid" >
+												 	<h:outputText id="msgId" value="Id"/>
+						 	<p:inputText id="txtId" binding="#{systemCompanyParameterView.txtId}">
+						 		<p:ajax update="panelSystemCompanyParameter,msg,panelBotones" listener="#{systemCompanyParameterView.listener_txtId}"/>
+						 	</p:inputText>	
+																		
+													<h:outputText id="msgCode" value=" Code"/>
+							<p:inputText id="txtCode" disabled="true" binding="#{systemCompanyParameterView.txtCode}"/>
+													<h:outputText id="msgCompanyAddress" value=" CompanyAddress"/>
+							<p:inputText id="txtCompanyAddress" disabled="true" binding="#{systemCompanyParameterView.txtCompanyAddress}"/>
+													<h:outputText id="msgCompanyEmail" value=" CompanyEmail"/>
+							<p:inputText id="txtCompanyEmail" disabled="true" binding="#{systemCompanyParameterView.txtCompanyEmail}"/>
+													<h:outputText id="msgCompanyLogoUrl" value=" CompanyLogoUrl"/>
+							<p:inputText id="txtCompanyLogoUrl" disabled="true" binding="#{systemCompanyParameterView.txtCompanyLogoUrl}"/>
+													<h:outputText id="msgCompanyName" value=" CompanyName"/>
+							<p:inputText id="txtCompanyName" disabled="true" binding="#{systemCompanyParameterView.txtCompanyName}"/>
+													<h:outputText id="msgCompanyNit" value=" CompanyNit"/>
+							<p:inputText id="txtCompanyNit" disabled="true" binding="#{systemCompanyParameterView.txtCompanyNit}"/>
+													<h:outputText id="msgCompanyPhone" value=" CompanyPhone"/>
+							<p:inputText id="txtCompanyPhone" disabled="true" binding="#{systemCompanyParameterView.txtCompanyPhone}"/>
+													<h:outputText id="msgCompanyWeb" value=" CompanyWeb"/>
+							<p:inputText id="txtCompanyWeb" disabled="true" binding="#{systemCompanyParameterView.txtCompanyWeb}"/>
+													<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+							<p:inputText id="txtCreatedBy" disabled="true" binding="#{systemCompanyParameterView.txtCreatedBy}"/>
+													<h:outputText id="msgSystemLogoUrl" value=" SystemLogoUrl"/>
+							<p:inputText id="txtSystemLogoUrl" disabled="true" binding="#{systemCompanyParameterView.txtSystemLogoUrl}"/>
+													<h:outputText id="msgSystemName" value=" SystemName"/>
+							<p:inputText id="txtSystemName" disabled="true" binding="#{systemCompanyParameterView.txtSystemName}"/>
+													<h:outputText id="msgSystemUrl" value=" SystemUrl"/>
+							<p:inputText id="txtSystemUrl" disabled="true" binding="#{systemCompanyParameterView.txtSystemUrl}"/>
+													<h:outputText id="msgSystemVersion" value=" SystemVersion"/>
+							<p:inputText id="txtSystemVersion" disabled="true" binding="#{systemCompanyParameterView.txtSystemVersion}"/>
+													<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+							<p:inputText id="txtUpdatedBy" disabled="true" binding="#{systemCompanyParameterView.txtUpdatedBy}"/>
+												
+																				<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{systemCompanyParameterView.txtCreatedAt}" >
+								<p:ajax event="dateSelect" listener="#{systemCompanyParameterView.listener_txtCreatedAt}"  />
+							</p:calendar>
+														<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+														<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{systemCompanyParameterView.txtUpdatedAt}" >
+								<p:ajax event="dateSelect" listener="#{systemCompanyParameterView.listener_txtUpdatedAt}"  />
+							</p:calendar>
+																	   </h:panelGrid>
+				</p:panel>
+	   			<p:panel id="panelBotones">
+					<div align="center">					
+						<p:commandButton id="btnSave" binding="#{systemCompanyParameterView.btnSave}" disabled="true" value="Save" action="#{systemCompanyParameterView.action_save()}" update="panelSystemCompanyParameter,msg,panelBotones" />
+						<p:commandButton id="btnDelete" binding="#{systemCompanyParameterView.btnDelete}" disabled="true" value="Delete" action="#{systemCompanyParameterView.action_delete_master()}" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" update="panelSystemCompanyParameter,msg,panelBotones" />
+						<p:commandButton id="btnClear" value="Clear" action="#{systemCompanyParameterView.action_clear()}" update="panelSystemCompanyParameter,msg,panelBotones" />
+					</div>
+				</p:panel>			
+			</h:form>
+		</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	

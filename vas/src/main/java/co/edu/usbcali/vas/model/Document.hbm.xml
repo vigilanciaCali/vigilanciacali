@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 10, 2018 8:14:55 PM by Hibernate Tools 5.1.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.vas.model.Document" table="document" schema="public" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="users" class="co.edu.usbcali.vas.model.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="source" type="binary">
+            <column name="source" not-null="true" />
+        </property>
+        <property name="mimeType" type="java.lang.String">
+            <column name="mime_type" not-null="true" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" not-null="true" />
+        </property>
+        <property name="createdAt" type="java.util.Date">
+            <column name="created_at" length="29" not-null="true" />
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <column name="updated_at" length="29" />
+        </property>
+        <property name="createdBy" type="java.lang.String">
+            <column name="created_by" not-null="true" />
+        </property>
+        <property name="updatedBy" type="java.lang.String">
+            <column name="updated_by" />
+        </property>
+    </class>
+</hibernate-mapping>

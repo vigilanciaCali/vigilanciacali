@@ -1,0 +1,285 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+	    <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+		 
+		 <h:form id="form">
+			
+			 
+			<p:panel id="msgProjectClientesTitle" header="SystemParameterData">
+					<p:messages id="msg" />
+				<p:dataTable id ="tabla" value="#{systemParameterView.data}" var="systemParameter"
+					paginator="true" rows="5"  editable="true" >
+					 
+					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{systemParameterView.rowEventListener}" />
+					
+															<p:column filterBy="#{systemParameter.id}" sortBy="#{systemParameter.id}" headerText="id">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{systemParameter.id}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{systemParameter.id}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    										
+											
+						<p:column filterBy="#{systemParameter.booleanValue}" sortBy="#{systemParameter.booleanValue}" 
+							headerText="booleanValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.booleanValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.booleanValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.code}" sortBy="#{systemParameter.code}" 
+							headerText="code">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.code}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.code}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.createdBy}" sortBy="#{systemParameter.createdBy}" 
+							headerText="createdBy">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.createdBy}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.createdBy}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.doubleValue}" sortBy="#{systemParameter.doubleValue}" 
+							headerText="doubleValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.doubleValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.doubleValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.intValue}" sortBy="#{systemParameter.intValue}" 
+							headerText="intValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.intValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.intValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.name}" sortBy="#{systemParameter.name}" 
+							headerText="name">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.name}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.name}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.textValue}" sortBy="#{systemParameter.textValue}" 
+							headerText="textValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.textValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.textValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.updatedBy}" sortBy="#{systemParameter.updatedBy}" 
+							headerText="updatedBy">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.updatedBy}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.updatedBy}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+										
+										   						 
+						 <p:column filterBy="#{systemParameter.createdAt}" sortBy="#{systemParameter.createdAt}" 
+							headerText="createdAt">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.createdAt}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{systemParameter.createdAt}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{systemParameterView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{systemParameter.dateValue}" sortBy="#{systemParameter.dateValue}" 
+							headerText="dateValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.dateValue}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{systemParameter.dateValue}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{systemParameterView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{systemParameter.timeValue}" sortBy="#{systemParameter.timeValue}" 
+							headerText="timeValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.timeValue}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{systemParameter.timeValue}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{systemParameterView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{systemParameter.updatedAt}" sortBy="#{systemParameter.updatedAt}" 
+							headerText="updatedAt">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.updatedAt}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{systemParameter.updatedAt}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{systemParameterView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   											
+					<p:column headerText="Options" >
+						<p:rowEditor id="row"/>
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
+						<p:commandButton id="btnDelete" actionListener="#{systemParameterView.actionDeleteDataTableEditable}" title="Delete" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" icon="ui-icon-trash" update=":form:msg,:form:tabla" >
+							<f:attribute name="selectedSystemParameter" value="#{systemParameter}" />  
+						</p:commandButton>
+						
+					</p:column>	
+				
+				</p:dataTable>	
+					
+				
+			</p:panel>
+				
+	   </h:form>
+		 </f:view>
+			</ui:define>		
+		</ui:composition>	
+	
+	</h:body>	
+	
+</html>	

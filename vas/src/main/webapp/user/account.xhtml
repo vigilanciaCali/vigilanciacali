@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<f:view>
+			<!-- *********************** HEADER*************************** -->
+			<section class="content-header">
+				<h1>
+					Cuenta <small>Usuario</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="index.xhtml"><i class="fa fa-home"></i> Home</a></li>
+					<li class="active"><i class="fa fa-calculator"></i> Cuenta</li>
+				</ol>
+			</section>
+			<br></br>
+
+			<!-- **********************DATA**************************** -->
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-7">
+					<div align="center" style="font-size: 13px;">
+						<p:messages id="message" autoUpdate="true" closable="true" style="width: 100%;" />
+						<h:form id="frm">
+							<p:growl id="growl" life="3000" autoUpdate="true" />
+
+								<p:panel>
+									<div align="left">
+									<h3><small>Información General</small></h3>
+									</div>
+								
+								<h:panelGrid columns="2">
+
+									<h:outputText value="Nombre:" for="txtFirstname" />
+									<p:inputText id="txtName"
+										value="#{userAccountView.strName}" maxlength="100" />
+
+									<h:outputText value="Email:" for="txtLogin" />
+									<p:inputText id="txtLogin"
+										value="#{userAccountView.strLogin}" maxlength="255" />
+
+								</h:panelGrid>									
+								<br></br>
+								<p:commandButton id="btnSave" value="Actualizar"
+									styleClass="btn btn-primary active btn-xs"
+									action="#{userAccountView.action_modify_account()}"
+									update="frm" />
+								</p:panel>
+							
+							<p:spacer width="100" height="10" />
+							
+							<p:panel>
+								<div align="left">
+									<h3><small>Password</small></h3>
+								</div>
+								<h:panelGrid columns="2">
+									<h:outputText value="Contraseña:" for="txtPassword" />
+									<p:password id="txtPassword"
+										binding="#{userAccountView.txtPassword}" maxlength="30"
+										placeholder="Contraseña"
+										feedback="true" />
+
+									<h:outputText value="Confirmar Contraseña:" for="txtValidatePassword" />
+									<p:password id="txtValidatePassword"
+										binding="#{userAccountView.txtValidatePassword}" maxlength="30"
+										placeholder="Confirmar Contraseña" 
+										feedback="true" />
+								</h:panelGrid>
+								<br></br>
+								<p:commandButton id="btnRestablecer" value="Cambiar Contraseña"
+									styleClass="btn btn-primary active btn-xs"
+									action="#{userAccountView.action_modify_password()}"
+									update="frm" />
+						
+							</p:panel>
+
+
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</f:view>
+	</ui:define>
+</ui:composition>

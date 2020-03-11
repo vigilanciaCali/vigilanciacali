@@ -1,0 +1,195 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="breadcrumb">
+		<li style="color: #FFCC00; font-size: 20px;"><i
+			class="fa fa-th-list" /> Parametros</li>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="frm">
+			<p:growl id="growl" life="3000" autoUpdate="true" />
+			<div class="ui-g">
+
+				<div class="ui-g-12">
+					<div class="card no-margin">
+					
+					<p:dataTable id="tabla" style="text-align: left; font-size: 14px;"
+							var="systemParameter" value="#{systemParameterView.data}"
+							paginator="true" rows="20" rowsPerPageTemplate="20,30,40"
+							resizableColumns="true" liveResize="true" reflow="true"
+							filterDelay="1200" widgetVar="systemParameter"
+							emptyMessage="No se encontraron registros en el sistema"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							editable="true">
+					 
+					 <p:ajax event ="rowEdit" update=":frm,:frm:tabla" listener="#{systemParameterView.rowEventListener}" />
+					
+					<p:column filterBy="#{systemParameter.id}" sortBy="#{systemParameter.id}" headerText="id">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{systemParameter.id}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{systemParameter.id}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column filterBy="#{systemParameter.name}" sortBy="#{systemParameter.name}" 
+							headerText="name">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.name}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.name}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+                    										
+											
+						<p:column filterBy="#{systemParameter.booleanValue}" sortBy="#{systemParameter.booleanValue}" 
+							headerText="booleanValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.booleanValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.booleanValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.code}" sortBy="#{systemParameter.code}" 
+							headerText="code">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.code}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.code}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.doubleValue}" sortBy="#{systemParameter.doubleValue}" 
+							headerText="doubleValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.doubleValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.doubleValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						<p:column filterBy="#{systemParameter.intValue}" sortBy="#{systemParameter.intValue}" 
+							headerText="intValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.intValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.intValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+											
+						
+						
+											
+						<p:column filterBy="#{systemParameter.textValue}" sortBy="#{systemParameter.textValue}" 
+							headerText="textValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.textValue}"/>
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:inputText value="#{systemParameter.textValue}"/>
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{systemParameter.dateValue}" sortBy="#{systemParameter.dateValue}" 
+							headerText="dateValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.dateValue}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{systemParameter.dateValue}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{systemParameterView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   						 
+						 <p:column filterBy="#{systemParameter.timeValue}" sortBy="#{systemParameter.timeValue}" 
+							headerText="timeValue">
+							
+								<p:cellEditor>
+								
+								<f:facet name="output">
+									<h:outputText value="#{systemParameter.timeValue}">
+									  <f:convertDateTime  pattern="dd/MM/yyyy"/>
+									</h:outputText>		
+								</f:facet>
+							
+								<f:facet name="input">
+									<p:calendar value="#{systemParameter.timeValue}" showOn="button" pattern="dd/MM/yyyy" navigator="true" >
+									  <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="#{systemParameterView.timeZone}" />	
+								    </p:calendar>		
+								</f:facet>
+								</p:cellEditor>	
+							</p:column>
+						
+					   											
+					<p:column headerText="Options" >
+						<p:rowEditor id="row"/>
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+				
+					</p:column>	
+				
+				</p:dataTable>	
+					
+		
+				</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

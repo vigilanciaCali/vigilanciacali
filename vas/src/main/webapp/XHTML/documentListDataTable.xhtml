@@ -1,0 +1,172 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>
+
+	<h:body>
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+					
+					<!-- Expired session -->
+					<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" />
+					<p:dialog modal="true" widgetVar="sessionTimeOutDialog" header="Expired session"  draggable="false" closable="false">  
+	   					<h:outputText value="The session is finished" />
+	                 	<input id="confirmBackToLogin" 
+	                 		type="button" 
+	                 		value="Sign in"
+	                    	onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />   
+					</p:dialog>
+					
+		  			<h:form id="frm">								  		
+						
+						<p:panel id="panelDataTableDocument" header="DocumentData">
+							<p:growl id="men"/>				
+							<p:dataTable value="#{documentView.data}" var="document"
+								paginator="true" rows="5">
+																										<p:column filterBy="#{document.id}" sortBy="#{document.id}" >
+										 <f:facet name="header">
+										<h:outputText value="id"/>
+										</f:facet>
+										 <h:outputText value="#{document.id}"/>
+										 </p:column>
+			                    																									
+										<p:column filterBy="#{document.createdAt}" sortBy="#{document.createdAt}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{document.createdAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.createdBy}" sortBy="#{document.createdBy}" >
+										 <f:facet name="header">
+										<h:outputText value="CreatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{document.createdBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.description}" sortBy="#{document.description}" >
+										 <f:facet name="header">
+										<h:outputText value="Description"/>
+										</f:facet>
+										 <h:outputText value="#{document.description}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.mimeType}" sortBy="#{document.mimeType}" >
+										 <f:facet name="header">
+										<h:outputText value="MimeType"/>
+										</f:facet>
+										 <h:outputText value="#{document.mimeType}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.source}" sortBy="#{document.source}" >
+										 <f:facet name="header">
+										<h:outputText value="Source"/>
+										</f:facet>
+										 <h:outputText value="#{document.source}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.updatedAt}" sortBy="#{document.updatedAt}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedAt"/>
+										</f:facet>
+										 <h:outputText value="#{document.updatedAt}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.updatedBy}" sortBy="#{document.updatedBy}" >
+										 <f:facet name="header">
+										<h:outputText value="UpdatedBy"/>
+										</f:facet>
+										 <h:outputText value="#{document.updatedBy}"/>
+										</p:column>   
+			                    									
+										<p:column filterBy="#{document.id_Users}" sortBy="#{document.id_Users}" >
+										 <f:facet name="header">
+										<h:outputText value="Id_Users"/>
+										</f:facet>
+										 <h:outputText value="#{document.id_Users}"/>
+										</p:column>   
+			                    			                    
+								<p:column headerText="Options">
+									<p:commandButton id="btnEdit" icon="ui-icon-pencil"
+										update=":dialogDocument"
+										actionListener="#{documentView.action_edit}">
+										<f:attribute name="selectedDocument" value="#{document}" />
+									</p:commandButton>
+									<p:commandButton id="btnDelete"									
+										title="Delete" actionListener="#{documentView.action_delete_datatable}"
+										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
+										icon="ui-icon-trash" update="@form">
+										<f:attribute name="selectedDocument" value="#{document}" />
+									</p:commandButton>
+								</p:column>									                    
+							</p:dataTable>	
+						</p:panel>
+						<p:panel id="panelBoton">
+							<div align="center">
+								<p:commandButton id="btnNew" value="New"
+									action="#{documentView.action_new()}" update=":dialogDocument" />
+							</div>
+						</p:panel>						
+		   			</h:form>
+					<p:dialog id="dialogDocument" appendTo="@(body)" draggable="true"
+						closable="false" visible="#{documentView.showDialog}" resizable="false"
+						modal="true" width="500">
+						<h:form id="formDialog">
+							<p:messages id="msg" />
+							<p:panel id="panelDocument" header="Document">							
+							    <h:panelGrid columns="2" id="panelGrid" >
+																		 <h:outputText id="msgId" value="Id"/>
+									 <p:inputText id="txtId" binding="#{documentView.txtId}">
+									 <p:ajax update=":dialogDocument" listener="#{documentView.listener_txtId}"/>
+									 </p:inputText>	
+																											
+																		<h:outputText id="msgCreatedBy" value=" CreatedBy"/>
+									<p:inputText id="txtCreatedBy" disabled="true" binding="#{documentView.txtCreatedBy}"/>
+																		<h:outputText id="msgDescription" value=" Description"/>
+									<p:inputText id="txtDescription" disabled="true" binding="#{documentView.txtDescription}"/>
+																		<h:outputText id="msgMimeType" value=" MimeType"/>
+									<p:inputText id="txtMimeType" disabled="true" binding="#{documentView.txtMimeType}"/>
+																		<h:outputText id="msgSource" value=" Source"/>
+									<p:inputText id="txtSource" disabled="true" binding="#{documentView.txtSource}"/>
+																		<h:outputText id="msgUpdatedBy" value=" UpdatedBy"/>
+									<p:inputText id="txtUpdatedBy" disabled="true" binding="#{documentView.txtUpdatedBy}"/>
+																		<h:outputText id="msgId_Users" value=" Id_Users"/>
+									<p:inputText id="txtId_Users" disabled="true" binding="#{documentView.txtId_Users}"/>
+																		
+																													<h:outputText id="msgCreatedAt" value=" CreatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{documentView.txtCreatedAt}" >
+										<p:ajax event="dateSelect" listener="#{documentView.listener_txtCreatedAt}" />
+										</p:calendar>
+																				<h:outputText id="msgUpdatedAt" value=" UpdatedAt"/>
+																				<p:calendar showOn="button" navigator="true" locale="en" 
+										binding="#{documentView.txtUpdatedAt}" >
+										<p:ajax event="dateSelect" listener="#{documentView.listener_txtUpdatedAt}" />
+										</p:calendar>
+																										    </h:panelGrid>
+							</p:panel>						   
+							<p:panel id="panelBotones">
+								<div align="center">					
+									<p:commandButton id="btnSave" binding="#{documentView.btnSave}" value="Save" action="#{documentView.action_save()}" update=":dialogDocument :frm:panelDataTableDocument" />
+									<p:commandButton id="btnClear" value="Clear" action="#{documentView.action_clear()}" update=":dialogDocument" />
+									<p:commandButton id="btnExit" value="Exit" action="#{documentView.action_closeDialog()}" update=":dialogDocument" />
+								</div>
+							</p:panel>					
+						</h:form>
+					</p:dialog>
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
+	</h:body>	
+</html>	
