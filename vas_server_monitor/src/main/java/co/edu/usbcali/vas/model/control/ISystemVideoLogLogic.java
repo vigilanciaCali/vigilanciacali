@@ -1,6 +1,7 @@
 package co.edu.usbcali.vas.model.control;
 
 import co.edu.usbcali.vas.model.SystemVideoLog;
+import co.edu.usbcali.vas.model.dto.SystemLogDTO;
 import co.edu.usbcali.vas.model.dto.SystemVideoLogDTO;
 
 import java.math.BigDecimal;
@@ -59,4 +60,9 @@ public interface ISystemVideoLogLogic {
         throws Exception;
 
 	public String save_systemVideoLog(String action, String nota) throws Exception;
+
+	public void save_systemLog_vasTraceRest(SystemLogDTO entity) throws Exception;
+	
+	
+	
 }

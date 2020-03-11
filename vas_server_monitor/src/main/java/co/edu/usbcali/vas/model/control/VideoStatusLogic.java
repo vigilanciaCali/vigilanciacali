@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.usbcali.vas.dataaccess.dao.ISystemParameterDAO;
+import co.edu.usbcali.vas.dataaccess.dao.IVideoStatusDAO;
 import co.edu.usbcali.vas.exceptions.ZMessManager;
-import co.edu.usbcali.vas.model.SystemParameter;
-import co.edu.usbcali.vas.model.dto.SystemParameterDTO;
+import co.edu.usbcali.vas.model.VideoStatus;
+import co.edu.usbcali.vas.model.dto.VideoStatusDTO;
 import co.edu.usbcali.vas.utilities.Utilities;
 
 
@@ -25,29 +25,30 @@ import co.edu.usbcali.vas.utilities.Utilities;
 *
 */
 @Scope("singleton")
-@Service("SystemParameterLogic")
-public class SystemParameterLogic implements ISystemParameterLogic {
-    private static final Logger log = LoggerFactory.getLogger(SystemParameterLogic.class);
+@Service("VideoStatusLogic")
+public class VideoStatusLogic implements IVideoStatusLogic {
+    private static final Logger log = LoggerFactory.getLogger(VideoStatusLogic.class);
 
     /**
-     * DAO injected by Spring that manages SystemParameter entities
+     * DAO injected by Spring that manages VideoStatus entities
      *
      */
     @Autowired
-    private ISystemParameterDAO systemParameterDAO;
+    private IVideoStatusDAO videoStatusDAO;
+
 
     @Transactional(readOnly = true)
-    public List<SystemParameter> getSystemParameter() throws Exception {
-        log.debug("finding all SystemParameter instances");
+    public List<VideoStatus> getVideoStatus() throws Exception {
+        log.debug("finding all VideoStatus instances");
 
-        List<SystemParameter> list = new ArrayList<SystemParameter>();
+        List<VideoStatus> list = new ArrayList<VideoStatus>();
 
         try {
-            list = systemParameterDAO.findAll();
+            list = videoStatusDAO.findAll();
         } catch (Exception e) {
-            log.error("finding all SystemParameter failed", e);
+            log.error("finding all VideoStatus failed", e);
             throw new ZMessManager().new GettingException(ZMessManager.ALL +
-                "SystemParameter");
+                "VideoStatus");
         } finally {
         }
 
@@ -55,16 +56,10 @@ public class SystemParameterLogic implements ISystemParameterLogic {
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void saveSystemParameter(SystemParameter entity)
-        throws Exception {
-        log.debug("saving SystemParameter instance");
+    public void saveVideoStatus(VideoStatus entity) throws Exception {
+        log.debug("saving VideoStatus instance");
 
         try {
-
-            if (entity.getCode() == null) {
-                throw new ZMessManager().new EmptyFieldException("code");
-            }
-
             if ((entity.getCode() != null) &&
                     (Utilities.checkWordAndCheckWithlength(entity.getCode(), 255) == false)) {
                 throw new ZMessManager().new NotValidFormatException("code");
@@ -85,27 +80,19 @@ public class SystemParameterLogic implements ISystemParameterLogic {
                     "createdBy");
             }
 
-            if ((entity.getDoubleValue() != null) &&
-                    (Utilities.checkNumberAndCheckWithPrecisionAndScale("" +
-                        entity.getDoubleValue(), 131089, 0) == false)) {
+            if (entity.getDescription() == null) {
+                throw new ZMessManager().new EmptyFieldException("description");
+            }
+
+            if ((entity.getDescription() != null) &&
+                    (Utilities.checkWordAndCheckWithlength(
+                        entity.getDescription(), 255) == false)) {
                 throw new ZMessManager().new NotValidFormatException(
-                    "doubleValue");
+                    "description");
             }
 
             if (entity.getId() == null) {
                 throw new ZMessManager().new EmptyFieldException("id");
-            }
-
-            if ((entity.getName() != null) &&
-                    (Utilities.checkWordAndCheckWithlength(entity.getName(), 255) == false)) {
-                throw new ZMessManager().new NotValidFormatException("name");
-            }
-
-            if ((entity.getTextValue() != null) &&
-                    (Utilities.checkWordAndCheckWithlength(
-                        entity.getTextValue(), 255) == false)) {
-                throw new ZMessManager().new NotValidFormatException(
-                    "textValue");
             }
 
             if ((entity.getUpdatedBy() != null) &&
@@ -115,57 +102,56 @@ public class SystemParameterLogic implements ISystemParameterLogic {
                     "updatedBy");
             }
 
-            if (getSystemParameter(entity.getId()) != null) {
+            if (getVideoStatus(entity.getId()) != null) {
                 throw new ZMessManager(ZMessManager.ENTITY_WITHSAMEKEY);
             }
 
-            systemParameterDAO.save(entity);
+            videoStatusDAO.save(entity);
 
-            log.debug("save SystemParameter successful");
+            log.debug("save VideoStatus successful");
         } catch (Exception e) {
-            log.error("save SystemParameter failed", e);
+            log.error("save VideoStatus failed", e);
             throw e;
         } finally {
         }
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void deleteSystemParameter(SystemParameter entity)
-        throws Exception {
-        log.debug("deleting SystemParameter instance");
+    public void deleteVideoStatus(VideoStatus entity) throws Exception {
+        log.debug("deleting VideoStatus instance");
 
         if (entity == null) {
-            throw new ZMessManager().new NullEntityExcepcion("SystemParameter");
+            throw new ZMessManager().new NullEntityExcepcion("VideoStatus");
         }
 
         if (entity.getId() == null) {
             throw new ZMessManager().new EmptyFieldException("id");
         }
 
-        try {
-            systemParameterDAO.delete(entity);
+    
 
-            log.debug("delete SystemParameter successful");
+        try {
+
+
+
+
+            videoStatusDAO.delete(entity);
+
+            log.debug("delete VideoStatus successful");
         } catch (Exception e) {
-            log.error("delete SystemParameter failed", e);
+            log.error("delete VideoStatus failed", e);
             throw e;
         } finally {
         }
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void updateSystemParameter(SystemParameter entity)
-        throws Exception {
-        log.debug("updating SystemParameter instance");
+    public void updateVideoStatus(VideoStatus entity) throws Exception {
+        log.debug("updating VideoStatus instance");
 
         try {
             if (entity == null) {
-                throw new ZMessManager().new NullEntityExcepcion(
-                    "SystemParameter");
-            }
-
-            if (entity.getCode() == null) {
-                throw new ZMessManager().new EmptyFieldException("code");
+                throw new ZMessManager().new NullEntityExcepcion("VideoStatus");
             }
 
             if ((entity.getCode() != null) &&
@@ -188,27 +174,19 @@ public class SystemParameterLogic implements ISystemParameterLogic {
                     "createdBy");
             }
 
-            if ((entity.getDoubleValue() != null) &&
-                    (Utilities.checkNumberAndCheckWithPrecisionAndScale("" +
-                        entity.getDoubleValue(), 131089, 0) == false)) {
+            if (entity.getDescription() == null) {
+                throw new ZMessManager().new EmptyFieldException("description");
+            }
+
+            if ((entity.getDescription() != null) &&
+                    (Utilities.checkWordAndCheckWithlength(
+                        entity.getDescription(), 255) == false)) {
                 throw new ZMessManager().new NotValidFormatException(
-                    "doubleValue");
+                    "description");
             }
 
             if (entity.getId() == null) {
                 throw new ZMessManager().new EmptyFieldException("id");
-            }
-
-            if ((entity.getName() != null) &&
-                    (Utilities.checkWordAndCheckWithlength(entity.getName(), 255) == false)) {
-                throw new ZMessManager().new NotValidFormatException("name");
-            }
-
-            if ((entity.getTextValue() != null) &&
-                    (Utilities.checkWordAndCheckWithlength(
-                        entity.getTextValue(), 255) == false)) {
-                throw new ZMessManager().new NotValidFormatException(
-                    "textValue");
             }
 
             if ((entity.getUpdatedBy() != null) &&
@@ -218,69 +196,57 @@ public class SystemParameterLogic implements ISystemParameterLogic {
                     "updatedBy");
             }
 
-            systemParameterDAO.update(entity);
+            videoStatusDAO.update(entity);
 
-            log.debug("update SystemParameter successful");
+            log.debug("update VideoStatus successful");
         } catch (Exception e) {
-            log.error("update SystemParameter failed", e);
+            log.error("update VideoStatus failed", e);
             throw e;
         } finally {
         }
     }
 
     @Transactional(readOnly = true)
-    public List<SystemParameterDTO> getDataSystemParameter()
-        throws Exception {
+    public List<VideoStatusDTO> getDataVideoStatus() throws Exception {
         try {
-            List<SystemParameter> systemParameter = systemParameterDAO.findAll();
+            List<VideoStatus> videoStatus = videoStatusDAO.findAll();
 
-            List<SystemParameterDTO> systemParameterDTO = new ArrayList<SystemParameterDTO>();
+            List<VideoStatusDTO> videoStatusDTO = new ArrayList<VideoStatusDTO>();
 
-            for (SystemParameter systemParameterTmp : systemParameter) {
-                SystemParameterDTO systemParameterDTO2 = new SystemParameterDTO();
+            for (VideoStatus videoStatusTmp : videoStatus) {
+                VideoStatusDTO videoStatusDTO2 = new VideoStatusDTO();
 
-                systemParameterDTO2.setId(systemParameterTmp.getId());
-                systemParameterDTO2.setBooleanValue((systemParameterTmp.getBooleanValue() != null)
-                    ? systemParameterTmp.getBooleanValue() : null);
-                systemParameterDTO2.setCode((systemParameterTmp.getCode() != null)
-                    ? systemParameterTmp.getCode() : null);
-                systemParameterDTO2.setCreatedAt(systemParameterTmp.getCreatedAt());
-                systemParameterDTO2.setCreatedBy((systemParameterTmp.getCreatedBy() != null)
-                    ? systemParameterTmp.getCreatedBy() : null);
-                systemParameterDTO2.setDateValue(systemParameterTmp.getDateValue());
-                systemParameterDTO2.setDoubleValue((systemParameterTmp.getDoubleValue() != null)
-                    ? systemParameterTmp.getDoubleValue() : null);
-                systemParameterDTO2.setIntValue((systemParameterTmp.getIntValue() != null)
-                    ? systemParameterTmp.getIntValue() : null);
-                systemParameterDTO2.setName((systemParameterTmp.getName() != null)
-                    ? systemParameterTmp.getName() : null);
-                systemParameterDTO2.setTextValue((systemParameterTmp.getTextValue() != null)
-                    ? systemParameterTmp.getTextValue() : null);
-                systemParameterDTO2.setTimeValue(systemParameterTmp.getTimeValue());
-                systemParameterDTO2.setUpdatedAt(systemParameterTmp.getUpdatedAt());
-                systemParameterDTO2.setUpdatedBy((systemParameterTmp.getUpdatedBy() != null)
-                    ? systemParameterTmp.getUpdatedBy() : null);
-                systemParameterDTO.add(systemParameterDTO2);
+                videoStatusDTO2.setId(videoStatusTmp.getId());
+                videoStatusDTO2.setCode((videoStatusTmp.getCode() != null)
+                    ? videoStatusTmp.getCode() : null);
+                videoStatusDTO2.setCreatedAt(videoStatusTmp.getCreatedAt());
+                videoStatusDTO2.setCreatedBy((videoStatusTmp.getCreatedBy() != null)
+                    ? videoStatusTmp.getCreatedBy() : null);
+                videoStatusDTO2.setDescription((videoStatusTmp.getDescription() != null)
+                    ? videoStatusTmp.getDescription() : null);
+                videoStatusDTO2.setUpdatedAt(videoStatusTmp.getUpdatedAt());
+                videoStatusDTO2.setUpdatedBy((videoStatusTmp.getUpdatedBy() != null)
+                    ? videoStatusTmp.getUpdatedBy() : null);
+                videoStatusDTO.add(videoStatusDTO2);
             }
 
-            return systemParameterDTO;
+            return videoStatusDTO;
         } catch (Exception e) {
             throw e;
         }
     }
 
     @Transactional(readOnly = true)
-    public SystemParameter getSystemParameter(Integer id)
-        throws Exception {
-        log.debug("getting SystemParameter instance");
+    public VideoStatus getVideoStatus(Integer id) throws Exception {
+        log.debug("getting VideoStatus instance");
 
-        SystemParameter entity = null;
+        VideoStatus entity = null;
 
         try {
-            entity = systemParameterDAO.findById(id);
+            entity = videoStatusDAO.findById(id);
         } catch (Exception e) {
-            log.error("get SystemParameter failed", e);
-            throw new ZMessManager().new FindingException("SystemParameter");
+            log.error("get VideoStatus failed", e);
+            throw new ZMessManager().new FindingException("VideoStatus");
         } finally {
         }
 
@@ -288,17 +254,16 @@ public class SystemParameterLogic implements ISystemParameterLogic {
     }
 
     @Transactional(readOnly = true)
-    public List<SystemParameter> findPageSystemParameter(
-        String sortColumnName, boolean sortAscending, int startRow,
-        int maxResults) throws Exception {
-        List<SystemParameter> entity = null;
+    public List<VideoStatus> findPageVideoStatus(String sortColumnName,
+        boolean sortAscending, int startRow, int maxResults)
+        throws Exception {
+        List<VideoStatus> entity = null;
 
         try {
-            entity = systemParameterDAO.findPage(sortColumnName, sortAscending,
+            entity = videoStatusDAO.findPage(sortColumnName, sortAscending,
                     startRow, maxResults);
         } catch (Exception e) {
-            throw new ZMessManager().new FindingException(
-                "SystemParameter Count");
+            throw new ZMessManager().new FindingException("VideoStatus Count");
         } finally {
         }
 
@@ -306,14 +271,13 @@ public class SystemParameterLogic implements ISystemParameterLogic {
     }
 
     @Transactional(readOnly = true)
-    public Long findTotalNumberSystemParameter() throws Exception {
+    public Long findTotalNumberVideoStatus() throws Exception {
         Long entity = null;
 
         try {
-            entity = systemParameterDAO.count();
+            entity = videoStatusDAO.count();
         } catch (Exception e) {
-            throw new ZMessManager().new FindingException(
-                "SystemParameter Count");
+            throw new ZMessManager().new FindingException("VideoStatus Count");
         } finally {
         }
 
@@ -378,10 +342,10 @@ public class SystemParameterLogic implements ISystemParameterLogic {
                             * @throws Exception
                             */
     @Transactional(readOnly = true)
-    public List<SystemParameter> findByCriteria(Object[] variables,
+    public List<VideoStatus> findByCriteria(Object[] variables,
         Object[] variablesBetween, Object[] variablesBetweenDates)
         throws Exception {
-        List<SystemParameter> list = new ArrayList<SystemParameter>();
+        List<VideoStatus> list = new ArrayList<VideoStatus>();
         String where = new String();
         String tempWhere = new String();
 
@@ -478,7 +442,7 @@ public class SystemParameterLogic implements ISystemParameterLogic {
         }
 
         try {
-            list = systemParameterDAO.findByCriteria(where);
+            list = videoStatusDAO.findByCriteria(where);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         } finally {
@@ -487,79 +451,20 @@ public class SystemParameterLogic implements ISystemParameterLogic {
         return list;
     }
     
-	// OBTENER PARAMETROS PERSONALIZADOS DE LA DB / POR
-	// CODIGO---------------------------------------------------------------------------
-	@Override
+    @Override
 	@Transactional(readOnly = true)
-	public String getParamByCodeTexValue(String code) throws Exception {
-		log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeTexValue");
-		SystemParameter entity = null;
+	public VideoStatus getVideoStatusByCode(String code) throws Exception {
+		log.info("VideoStatusLogic getVideoStatusByCode");
+		VideoStatus entity = null;
 		try {
-			entity = (SystemParameter) systemParameterDAO.getSystemParameterByCode(code.trim());
-			log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeTexValue: "+entity.getTextValue());
+			entity = (VideoStatus) videoStatusDAO.getVideoStatusByCode(code.trim());
 		} catch (Exception e) {
 			log.error("El parametro : " + code + " No existe en la base de datos", e);
 		}
-		log.info("SystemParameterLogic getParamByCodeTexValue: "+entity.getTextValue());
-		return entity.getTextValue();
-		
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Integer getParamByCodeNumValue(String code) throws Exception {
-		log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeNumValue");
-		SystemParameter entity = null;
-		try {
-			entity = (SystemParameter) systemParameterDAO.getSystemParameterByCode(code.trim());
-			log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeNumValue: "+entity.getIntValue().toString());
-		} catch (Exception e) {
-			log.error("El parametro : " + code + " No existe en la base de datos", e);
-		}
-		return entity.getIntValue();
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Date getParamByCodeDateValue(String code) throws Exception {
-		log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeDateValue");
-		SystemParameter entity = null;
-		try {
-			entity = (SystemParameter) systemParameterDAO.getSystemParameterByCode(code.trim());
-		} catch (Exception e) {
-			log.error("El parametro : " + code + " No existe en la base de datos", e);
-		}
-		return entity.getDateValue();
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Boolean getParamByCodeBooleanValue(String code) throws Exception {
-		log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeBooleanValue");
-		SystemParameter entity = null;
-		try {
-			entity = (SystemParameter) systemParameterDAO.getSystemParameterByCode(code.trim());
-			log.info("VAS_SERVER_MONITOR SystemParameterLogic getParamByCodeBooleanValue: "+entity.getBooleanValue().toString());
-		} catch (Exception e) {
-			log.error("El parametro : " + code + " No existe en la base de datos", e);
-		}
-		return entity.getBooleanValue();
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public SystemParameter getSystemParamByCode(String code) throws Exception {
-		log.info("VAS_SERVER_MONITOR SystemParameterLogic getSystemParamByCode");
-		SystemParameter entity = null;
-		try {
-			entity = (SystemParameter) systemParameterDAO.getSystemParameterByCode(code.trim());
-		
-		} catch (Exception e) {
-			log.error("El parametro : " + code + " No existe en la base de datos", e);
-		}
+		log.info("VideoStatusLogic getVideoStatusByCode: "+entity.getDescription());
 		return entity;
+		
 	}
-	
-	
-	
+    
+    
 }

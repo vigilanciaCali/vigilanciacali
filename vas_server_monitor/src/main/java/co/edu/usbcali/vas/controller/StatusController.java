@@ -9,32 +9,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
 @Controller
 @RequestMapping("/status")
 public class StatusController {
 	private static final Logger log = LoggerFactory.getLogger(StatusController.class);
 
-	//TEST
+	// TEST
 	@CrossOrigin
 	@GetMapping(value = "/test/")
-	public @ResponseBody Boolean keepalive() throws Exception{
+	public @ResponseBody Boolean keepalive() throws Exception {
 		log.info("VAS_SERVER_MONITOR MonitorController keepalive");
 		Boolean alive = true;
 
 		return alive;
 	}
-	
-	//TEST
-		@CrossOrigin
-		@PostMapping(value = "/available/")
-		public @ResponseBody Boolean status() throws Exception{
-			log.info("VAS_SERVER_MONITOR MonitorController status");
-			Boolean alive = true;
 
-			return alive;
-		}
-	
+	// TEST
+	@CrossOrigin
+	@PostMapping(value = "/available/")
+	public @ResponseBody Boolean status() throws Exception {
+		log.info("VAS_SERVER_MONITOR MonitorController status");
+		Boolean alive = true;
+
+		return alive;
+	}
 
 }

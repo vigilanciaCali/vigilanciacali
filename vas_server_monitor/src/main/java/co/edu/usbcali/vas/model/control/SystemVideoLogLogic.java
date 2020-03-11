@@ -3,6 +3,7 @@ package co.edu.usbcali.vas.model.control;
 import co.edu.usbcali.vas.dataaccess.dao.*;
 import co.edu.usbcali.vas.exceptions.*;
 import co.edu.usbcali.vas.model.*;
+import co.edu.usbcali.vas.model.dto.SystemLogDTO;
 import co.edu.usbcali.vas.model.dto.SystemVideoLogDTO;
 import co.edu.usbcali.vas.utilities.Constantes;
 import co.edu.usbcali.vas.utilities.Utilities;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 
@@ -43,6 +45,9 @@ public class SystemVideoLogLogic implements ISystemVideoLogLogic {
      */
     @Autowired
     private ISystemVideoLogDAO systemVideoLogDAO;
+    
+    @Autowired
+    private ISystemParameterLogic systemParameterLogic;
 
     @Transactional(readOnly = true)
     public List<SystemVideoLog> getSystemVideoLog() throws Exception {
@@ -460,4 +465,73 @@ public class SystemVideoLogLogic implements ISystemVideoLogLogic {
 		}
     	return "";
     }
+    
+	// SAVE LOG VAS_TRACE
+	// REST------------------------------------------------------------------------
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void save_systemLog_vasTraceRest(SystemLogDTO entity) throws Exception {
+		log.info("VAS_SERVER_MONITOR save_systemLog_VasTraceRest save_action");
+
+		try {
+
+			if (entity != null) {
+
+				// CHECK STATUS
+				Boolean serviceStatus = this.checkServiceStatus();
+
+				if (serviceStatus.booleanValue() == true) {
+					log.info("VAS_SERVER_MONITOR save_systemLogRest serviceStatus:" + serviceStatus.booleanValue());
+
+					String url = this.getVasTraceController() + "systemlog/save/";
+					log.info("url: " + url);
+					RestTemplate restTemplate = new RestTemplate();
+					entity = restTemplate.postForObject(url, entity, SystemLogDTO.class);
+
+					// log.info("VAS save_systemLogRest STATUS:"+status);
+				}
+			}
+
+		} catch (RuntimeException e) {
+			log.error("VAS save_systemLogRest failed", e);
+		}
+
+	}
+    
+  
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    public Boolean checkServiceStatus() throws Exception {
+    	log.info("VAS checkServiceStatus");
+		
+    	Boolean status = false;
+    	
+    	try {
+
+    		//CHECK STATUS
+    		String urlStatus = this.getVasTraceController() + "status/available/";
+			log.info("url: "+urlStatus);
+			RestTemplate restTemplateStatus = new RestTemplate();
+			status = restTemplateStatus.postForObject(urlStatus, status, Boolean.class);
+			log.info("status: "+status.booleanValue());
+			
+		} catch (Exception e) {			
+			log.error("VAS save_systemLogRest failed", e);
+		}
+		return status;
+    }
+    
+    public String getVasTraceController() {
+
+		String serviceController = "";
+		try {
+			serviceController = systemParameterLogic.getParamByCodeTexValue(Constantes.SYSTEM_TRACE_CONTROLLER);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return serviceController;
+	}
+    
+    
+    
+    
 }

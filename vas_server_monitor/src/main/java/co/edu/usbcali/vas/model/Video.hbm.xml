@@ -8,11 +8,17 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="users" class="co.edu.usbcali.vas.model.Users" fetch="select">
-            <column name="user_id" not-null="true" />
+        <many-to-one name="videoType" class="co.edu.usbcali.vas.model.VideoType" fetch="select">
+            <column name="type_id" not-null="true" />
         </many-to-one>
+        <many-to-one name="videoStatus" class="co.edu.usbcali.vas.model.VideoStatus" fetch="select">
+            <column name="status_id" not-null="true" />
+        </many-to-one>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+        </property>
         <property name="mimeType" type="java.lang.String">
-            <column name="mime_type" not-null="true" />
+            <column name="mime_type" />
         </property>
         <property name="description" type="java.lang.String">
             <column name="description" not-null="true" />
@@ -52,6 +58,9 @@
         </property>
         <property name="updatedBy" type="java.lang.String">
             <column name="updated_by" />
+        </property>
+        <property name="transactionId" type="java.lang.String">
+            <column name="transaction_id" not-null="true"/>
         </property>
         <set name="videoDocuments" table="video_document" inverse="true" lazy="true" fetch="select">
             <key>

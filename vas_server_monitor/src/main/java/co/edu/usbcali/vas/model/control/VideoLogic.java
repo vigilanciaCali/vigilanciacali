@@ -1,29 +1,24 @@
 package co.edu.usbcali.vas.model.control;
 
-import co.edu.usbcali.vas.dataaccess.dao.*;
-import co.edu.usbcali.vas.exceptions.*;
-import co.edu.usbcali.vas.model.*;
-import co.edu.usbcali.vas.model.dto.VideoDTO;
-import co.edu.usbcali.vas.utilities.Utilities;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.context.annotation.Scope;
-
-import org.springframework.stereotype.Service;
-
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import co.edu.usbcali.vas.dataaccess.dao.IVideoDAO;
+import co.edu.usbcali.vas.dataaccess.dao.IVideoDocumentDAO;
+import co.edu.usbcali.vas.exceptions.ZMessManager;
+import co.edu.usbcali.vas.model.Video;
+import co.edu.usbcali.vas.model.VideoDocument;
+import co.edu.usbcali.vas.model.dto.VideoDTO;
+import co.edu.usbcali.vas.utilities.Utilities;
 
 
 /**
@@ -80,10 +75,7 @@ public class VideoLogic implements IVideoLogic {
         log.debug("saving Video instance");
 
         try {
-            if (entity.getUsers() == null) {
-                throw new ZMessManager().new ForeignException("users");
-            }
-
+   
             if (entity.getCreatedAt() == null) {
                 throw new ZMessManager().new EmptyFieldException("createdAt");
             }
@@ -101,16 +93,6 @@ public class VideoLogic implements IVideoLogic {
                         entity.getDescription(), 255) == false)) {
                 throw new ZMessManager().new NotValidFormatException(
                     "description");
-            }
-
-            if (entity.getMimeType() == null) {
-                throw new ZMessManager().new EmptyFieldException("mimeType");
-            }
-
-            if ((entity.getMimeType() != null) &&
-                    (Utilities.checkWordAndCheckWithlength(
-                        entity.getMimeType(), 255) == false)) {
-                throw new ZMessManager().new NotValidFormatException("mimeType");
             }
 
             if ((entity.getUrl() != null) &&
@@ -167,10 +149,6 @@ public class VideoLogic implements IVideoLogic {
         try {
             if (entity == null) {
                 throw new ZMessManager().new NullEntityExcepcion("Video");
-            }
-
-            if (entity.getUsers() == null) {
-                throw new ZMessManager().new ForeignException("users");
             }
 
             if ((entity.getAnalyticData() != null) &&
@@ -266,10 +244,6 @@ public class VideoLogic implements IVideoLogic {
                     "videoData");
             }
 
-            if (entity.getUsers().getId() == null) {
-                throw new ZMessManager().new EmptyFieldException("id_Users");
-            }
-
             videoDAO.update(entity);
 
             log.debug("update Video successful");
@@ -317,8 +291,6 @@ public class VideoLogic implements IVideoLogic {
                     ? videoTmp.getUrl() : null);
                 videoDTO2.setVideoData((videoTmp.getVideoData() != null)
                     ? videoTmp.getVideoData() : null);
-                videoDTO2.setId_Users((videoTmp.getUsers().getId() != null)
-                    ? videoTmp.getUsers().getId() : null);
                 videoDTO.add(videoDTO2);
             }
 
@@ -344,6 +316,8 @@ public class VideoLogic implements IVideoLogic {
 
         return entity;
     }
+    
+    
 
     @Transactional(readOnly = true)
     public List<Video> findPageVideo(String sortColumnName,
@@ -542,4 +516,21 @@ public class VideoLogic implements IVideoLogic {
 
         return list;
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Video getVideoByTransactionId(String transactionId) throws Exception {
+        log.debug("getting Video instance");
+
+        Video entity = null;
+
+        try {
+            entity = videoDAO.getVideoByTransactionId(transactionId);
+        } catch (Exception e) {
+            log.error("get Video failed", e);
+            throw new ZMessManager().new FindingException("Video");
+        }
+        return entity;
+    }
+    
 }

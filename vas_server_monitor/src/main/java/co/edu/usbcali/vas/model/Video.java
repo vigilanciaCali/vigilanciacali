@@ -13,7 +13,6 @@ public class Video  implements java.io.Serializable {
 
 
      private Long id;
-     private Users users;
      private String mimeType;
      private String description;
      private String url;
@@ -29,22 +28,25 @@ public class Video  implements java.io.Serializable {
      private String createdBy;
      private String updatedBy;
      private Set<VideoDocument> videoDocuments = new HashSet<VideoDocument>(0);
-
+     //
+     private String transactionId;
+     private VideoType videoType;
+     private VideoStatus videoStatus;
+     private Integer userId;
+     
     public Video() {
     }
 
 	
-    public Video(Long id, Users users, String mimeType, String description, Date createdAt, String createdBy) {
+    public Video(Long id, String mimeType, String description, Date createdAt, String createdBy) {
         this.id = id;
-        this.users = users;
         this.mimeType = mimeType;
         this.description = description;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
     }
-    public Video(Long id, Users users, String mimeType, String description, String url, String src, String info, String format, String type, String lenght, String videoData, String analyticData, Date createdAt, Date updatedAt, String createdBy, String updatedBy, Set<VideoDocument> videoDocuments) {
+    public Video(Long id, String mimeType, String description, String url, String src, String info, String format, String type, String lenght, String videoData, String analyticData, Date createdAt, Date updatedAt, String createdBy, String updatedBy, Set<VideoDocument> videoDocuments) {
        this.id = id;
-       this.users = users;
        this.mimeType = mimeType;
        this.description = description;
        this.url = url;
@@ -68,13 +70,6 @@ public class Video  implements java.io.Serializable {
     
     public void setId(Long id) {
         this.id = id;
-    }
-    public Users getUsers() {
-        return this.users;
-    }
-    
-    public void setUsers(Users users) {
-        this.users = users;
     }
     public String getMimeType() {
         return this.mimeType;
@@ -181,6 +176,46 @@ public class Video  implements java.io.Serializable {
     public void setVideoDocuments(Set<VideoDocument> videoDocuments) {
         this.videoDocuments = videoDocuments;
     }
+
+
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+
+
+	public VideoType getVideoType() {
+		return videoType;
+	}
+
+
+	public VideoStatus getVideoStatus() {
+		return videoStatus;
+	}
+
+
+	public void setVideoType(VideoType videoType) {
+		this.videoType = videoType;
+	}
+
+
+	public void setVideoStatus(VideoStatus videoStatus) {
+		this.videoStatus = videoStatus;
+	}
+
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 
 

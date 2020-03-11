@@ -1,44 +1,18 @@
 package co.edu.usbcali.vas.dataaccess.dao;
 
+import javax.annotation.Resource;
+
+import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+
 import co.edu.usbcali.vas.dataaccess.api.HibernateDaoImpl;
 import co.edu.usbcali.vas.model.Video;
 
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
 
-import org.hibernate.criterion.Example;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-
-import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Resource;
-
-
-/**
- * A data access object (DAO) providing persistence and search support for
- * Video entities. Transaction control of the save(), update() and
- * delete() operations can directly support Spring container-managed
- * transactions or they can be augmented to handle user-managed Spring
- * transactions. Each of these methods provides additional information for how
- * to configure it for the desired type of transaction control.
- *
- * @see lidis.Video
- */
 @Scope("singleton")
 @Repository("VideoDAO")
 public class VideoDAO extends HibernateDaoImpl<Video, Long> implements IVideoDAO {
@@ -49,4 +23,19 @@ public class VideoDAO extends HibernateDaoImpl<Video, Long> implements IVideoDAO
     public static IVideoDAO getFromApplicationContext(ApplicationContext ctx) {
         return (IVideoDAO) ctx.getBean("VideoDAO");
     }
+    
+    
+	@Override
+	public Video getVideoByTransactionId(String transactionId) throws Exception {
+		Video video = null;
+		try {
+			video = (Video) sessionFactory.getCurrentSession().getNamedQuery("getVideoByTransactionId")
+					.setParameter("pTransactionId", transactionId)
+					.getSingleResult();
+
+		} catch (Exception e) {
+			log.error("VideoDAO getVideoByTransactionId error ",e.getMessage());
+		}
+		return video;
+	}
 }

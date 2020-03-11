@@ -30,6 +30,8 @@
         <mapping resource="co/edu/usbcali/vas/model/Ticket.hbm.xml" />
         <mapping resource="co/edu/usbcali/vas/model/UserType.hbm.xml" />
         <mapping resource="co/edu/usbcali/vas/model/SystemCompanyParameter.hbm.xml" />
+        <mapping resource="co/edu/usbcali/vas/model/VideoType.hbm.xml" />
+        <mapping resource="co/edu/usbcali/vas/model/VideoStatus.hbm.xml" />
         <mapping resource="co/edu/usbcali/vas/model/Queries.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

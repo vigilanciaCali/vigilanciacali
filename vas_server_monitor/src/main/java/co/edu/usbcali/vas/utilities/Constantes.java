@@ -45,7 +45,6 @@ public class Constantes
   public final static String SYSTEM_URL_PARAMETER_CODE = "URL";
   public final static String SYSTEM_APP_SERVICE = "APP_SERVICE";
   public final static String REPORTS_SOURCE = "REPORTS_SOURCE";
-
   //FORMATO FECHAS
   public static String FORMATO_FECHA_CORTA = "dd/MM/yyyy";
   public static String FORMATO_FECHA_CORTA_YYYY_MM_DD = "yyyy-MM-dd";
@@ -65,33 +64,69 @@ public class Constantes
   public static String FORMATO_HORA24H_HHMM = "HH:mm";
   public static String FORMATO_HORA12H = "hh:mm a";
 
-  //MONITOR SERVICE
-  public static String MONITOR_REST_SERVICE_UPLOADED_VIDEO = "MONITOR_REST_SERVICE_UPLOADED_VIDEO";
-
-  //SERVERS
+  //QUEUE SQS------------------------------------------------
+  //ANL
+  public static String SQS_ANL_URL_HOST = "SQS_ANL_URL_HOST";
+  public static String SQS_ANL_ACCESS_KEYID = "SQS_ANL_ACCESS_KEYID";
+  public static String SQS_ANL_SECRETKEY = "SQS_ANL_SECRETKEY";
+  //TRC
+  public static String SQS_TRC_URL_HOST = "SQS_TRC_URL_HOST";
+  public static String SQS_TRC_ACCESS_KEYID = "SQS_TRC_ACCESS_KEYID";
+  public static String SQS_TRC_SECRETKEY = "SQS_TRC_SECRETKEY";
+  //OUT
+  public static String SQS_OUT_URL_HOST = "SQS_OUT_URL_HOST";
+  public static String SQS_OUT_ACCESS_KEYID = "SQS_OUT_ACCESS_KEYID";
+  public static String SQS_OUT_SECRETKEY = "SQS_OUT_SECRETKEY";
+ 
+  //SERVERS & SRVICES---------------------------------------------------
   public static String WEB_SERVER = "WEB_SERVER";
   public static String WEB_SERVER_TEMP = "WEB_SERVER_TEMP";
   public static String ALG_ANL_OUTPUT_SERVER = "ALG_ANL_OUTPUT_SERVER";
   public static String ALG_TRC_OUTPUT_SERVER = "ALG_TRC_OUTPUT_SERVER";
   //VAS SERVER CONTROLLER
-  public static String VAS_SERVER_CONTROLLER = "VAS_SERVER_CONTROLLER";
-  //VIDEO FOLDERS
+  public static String VAS_CONTROLLER = "VAS_CONTROLLER";
+  //ALG SERVICE
+  public static String SERVER_ALGORITHM_CONTROLLER = "SERVER_ALGORITHM_CONTROLLER";
+  //ALG SERVER
+  public static String ALGORITHM_SERVER = "ALGORITHM_SERVER";
+  public static String ALGORITHM_SERVER_PORT = "ALGORITHM_SERVER_PORT";
+  //MAIL SERVICE
+  public static String SYSTEM_NOTIFICATOR_CONTROLLER = "SYSTEM_NOTIFICATOR_CONTROLLER";
+  //TRACE SERVICE
+  public static String SYSTEM_TRACE_CONTROLLER = "SYSTEM_TRACE_CONTROLLER";
+  
+  //----------------------------------------------------------------
+  
+  //VIDEO FOLDERS LOCATIONS-----------------------------------------
   public static String INPUT_VIDEO_FOLDER = "INPUT_VIDEO_FOLDER";
   public static String OUTPUT_ALG_ANL_VIDEO_FOLDER = "OUTPUT_ALG_ANL_VIDEO_FOLDER";
   public static String OUTPUT_ALG_TRC_VIDEO_FOLDER = "OUTPUT_ALG_TRC_VIDEO_FOLDER";
   public static String TEMP_VIDEO_FOLDER = "TEMP_VIDEO_FOLDER";
   //FORMAT
   public static String VIDEO_FORMAT = "VIDEO_FORMAT";
-  //EXTERNAL PROGRAMS
-  public static String EXTERNAL_PROGRAM_ALG_ANL_LOCATION = "EXTERNAL_PROGRAM_ALG_ANL_LOCATION";
-  public static String EXTERNAL_PROGRAM_ALG_TRC_LOCATION = "EXTERNAL_PROGRAM_ALG_TRC_LOCATION";
-  //MATLAB RESULT FILE
-  public static String MATLAB_ANOMALOUS_RESULT_FILE = "MATLAB_ANOMALOUS_RESULT_FILE";
-  public static String MATLAB_TRACKER_RESULT_FILE = "MATLAB_TRACKER_RESULT_FILE";
-  //ALG INPUT FILES
-  public static String ALG_ANL_PARAMS_INPUT_FILE = "ALG_ANL_PARAMS_INPUT_FILE";
-  public static String ALG_TRC_PARAMS_INPUT_FILE = "ALG_TRC_PARAMS_INPUT_FILE";
-  
+ //ALG TYPE
+  public static String ALG_TYPE_ANOMALOUS = "EVENTOS ANOMALOS";
+  public static String ALG_TYPE_TRACKER = "SEGUIMIENTO OBJETOS";
+ //VIDEO STATUS------------------------------------
+  public static String NEW = "NEW";
+  public static String SENT = "SENT";
+  public static String PENDING = "PENDING";
+  public static String PROCESSED = "PROCESSED";
+  //VIDEO TYPE
+  public static String ANOMALOUS = "ANOMALOUS";
+  public static String TRACKER = "TRACKER";
+  //TIME INTERVAL
+  //WAIT FOR ANLALG
+  public static String TIME_WAITFOR_ALG = "TIME_WAITFOR_ALG";
+  //TEST---------------------------------
+  public static String ALG_ANL_AVAILABLE = "ALG_ANL_AVAILABLE";
+  public static String ALG_TRC_AVAILABLE = "ALG_TRC_AVAILABLE";
+  //TEST MODE
+  public static String TEST_MODE = "TEST_MODE";
+  public static String TEST_TIME = "TEST_TIME";
+  //ALG REQUEST
+  public static String ALG_ANL_REQUEST = "ALG_ANL_REQUEST";
+  public static String ALG_TRC_REQUEST = "ALG_TRC_REQUEST";
   
   
   

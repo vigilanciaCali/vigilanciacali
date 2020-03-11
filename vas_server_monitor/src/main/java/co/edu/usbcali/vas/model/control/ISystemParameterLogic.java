@@ -63,4 +63,6 @@ public interface ISystemParameterLogic {
     public Date getParamByCodeDateValue(String code) throws Exception;
 
     public Boolean getParamByCodeBooleanValue(String code) throws Exception;
+
+	public SystemParameter getSystemParamByCode(String code) throws Exception;
 }

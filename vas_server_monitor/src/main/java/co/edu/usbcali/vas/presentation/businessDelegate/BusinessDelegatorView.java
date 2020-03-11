@@ -54,6 +54,7 @@ import co.edu.usbcali.vas.model.control.IUserTypeLogic;
 import co.edu.usbcali.vas.model.control.IUsersLogic;
 import co.edu.usbcali.vas.model.control.IVideoDocumentLogic;
 import co.edu.usbcali.vas.model.control.IVideoLogic;
+import co.edu.usbcali.vas.model.dto.AlgorithmDTO;
 import co.edu.usbcali.vas.model.dto.CronJobDTO;
 import co.edu.usbcali.vas.model.dto.CronJobMonitoringDTO;
 import co.edu.usbcali.vas.model.dto.DeviceDTO;
@@ -78,8 +79,10 @@ import co.edu.usbcali.vas.model.dto.UserTypeDTO;
 import co.edu.usbcali.vas.model.dto.UsersDTO;
 import co.edu.usbcali.vas.model.dto.VideoDTO;
 import co.edu.usbcali.vas.model.dto.VideoDocumentDTO;
+import co.edu.usbcali.vas.monitor.control.IMonitorLogic;
+import co.edu.usbcali.vas.monitor.control.IMonitorTrackerLogic;
+import co.edu.usbcali.vas.monitorintegration.control.rest.IMonitorIntegrationRestLogic;
 import co.edu.usbcali.vas.security.control.ISecurityLogic;
-import co.edu.usbcali.vas.video.control.IMonitorLogic;
 
 @Scope("singleton")
 @Service("BusinessDelegatorView")
@@ -137,6 +140,10 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
     private ISecurityLogic securityLogic;
     @Autowired
     private IMonitorLogic monitorLogic;
+    @Autowired
+    private IMonitorTrackerLogic monitorTrackerLogic;
+    @Autowired
+    private IMonitorIntegrationRestLogic monitorIntegrationRestLogic;
 
     public List<SystemParameter> getSystemParameter() throws Exception {
         return systemParameterLogic.getSystemParameter();
@@ -1408,16 +1415,74 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
     	return monitorLogic.searchVideo(videoId);
     }*/
     
-    //REST SERVICES
+    //REST SERVICES---------------------------------------------------------------
     @Override
-    public String processVideoWithAnomalousEventsAlg(String videoFileTemp, String videoId, String inputVideoFolder,
-			String outputVideoFolder, String externalProgramLocation, String initTimeParam, String finalTimeParam)
-			throws Exception{
-				return monitorLogic.processVideoWithAnomalousEventsAlg(
-						videoFileTemp, videoId, inputVideoFolder, outputVideoFolder, 
-						externalProgramLocation, initTimeParam, finalTimeParam);
-    	
+    public void processVideoWithAnomalousEventsAlg()throws Exception{
+    	monitorLogic.processVideoWithAnomalousEventsAlg();	
     }
+    @Override
+    public void anomalyDetetectionResult(AlgorithmDTO data) throws Exception{
+    	monitorLogic.anomalyDetetectionResult(data);
+    }
+    
+    @Override
+    public void startAnlAlgRequest() throws Exception{
+    	monitorLogic.startAnlAlgRequest();
+    }
+    @Override
+	public void stopAnlAlgRequest() throws Exception{
+		monitorLogic.stopAnlAlgRequest();
+	}
+    //TRACKER---------------------------------------------
+    
+    @Override
+    public void trackerDetetectionResult(AlgorithmDTO data) throws Exception{
+    	monitorTrackerLogic.trackerDetetectionResult(data);
+    }
+    
+    @Override
+    public void startTrcAlgRequest() throws Exception{
+    	monitorTrackerLogic.startTrcAlgRequest();
+    }
+    @Override
+	public void stopTrcAlgRequest() throws Exception{
+    	monitorTrackerLogic.stopTrcAlgRequest();
+	}
+    
+    
+    //INTEGRATION SERVICE
+    @Override
+    public Boolean isAnlAlgAvailable() throws Exception{
+    	return monitorIntegrationRestLogic.isAnlAlgAvailable();
+    }
+    @Override
+	public Boolean isTrcAlgAvailable() throws Exception{
+		return monitorIntegrationRestLogic.isTrcAlgAvailable();
+	}
+    
+    //REST TEST---------------------------------------
+    @Override
+    public void sendDataToAnlService(AlgorithmDTO algorithmDTO) throws Exception{
+    	monitorIntegrationRestLogic.sendDataToAnlService(algorithmDTO);
+    }
+    @Override
+    public void sendDataToTrcService(AlgorithmDTO algorithmDTO) throws Exception{
+    	monitorIntegrationRestLogic.sendDataToTrcService(algorithmDTO);
+    }
+    
+    //SYSTEM PARAMS------------------------------------------
+    @Override
+    public SystemParameter getSystemParamByCode(String code) throws Exception{
+    	return systemParameterLogic.getSystemParamByCode(code);
+    }
+    
+    //MONITORING
+    @Override
+    public Boolean validate_system_folderHddMonitoring() throws Exception{
+    	return monitorLogic.validate_system_folderHddMonitoring();
+    }
+
+	
     
     
     

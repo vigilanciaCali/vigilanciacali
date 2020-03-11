@@ -53,4 +53,6 @@ public interface IVideoLogic {
     public Long findTotalNumberVideo() throws Exception;
 
     public List<VideoDTO> getDataVideo() throws Exception;
+
+	public Video getVideoByTransactionId(String transactionId) throws Exception;
 }

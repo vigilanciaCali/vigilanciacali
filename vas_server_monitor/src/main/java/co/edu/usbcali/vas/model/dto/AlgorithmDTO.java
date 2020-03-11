@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class AlgorithmDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private String videoId;
 	private String videoFileTemp;
 	private String videoFile;
 	private String tempVideoFolder;
@@ -12,11 +13,23 @@ public class AlgorithmDTO implements Serializable {
 	private String externalProgramLocation;
 	private String initTimeParam;
 	private String finalTimeParam;
+	private String lenght;
+	private String info;
+	private String url;
 	// TRACKER
 	private String posXParam;
 	private String posYParam;
 	private String posX2Param;
 	private String posY2Param;
+	//USER
+	private String userId;
+	private String userEmail;
+	//TRANSACTION
+	private String videoTransactionId;
+	private String message;
+	private String errorCode;
+	//JSON
+	private String jsonString;
 
 	public String getVideoFileTemp() {
 		return videoFileTemp;
@@ -105,5 +118,87 @@ public class AlgorithmDTO implements Serializable {
 	public void setPosY2Param(String posY2Param) {
 		this.posY2Param = posY2Param;
 	}
+
+	public String getVideoId() {
+		return videoId;
+	}
+
+	public String getLenght() {
+		return lenght;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
+	}
+
+	public void setLenght(String lenght) {
+		this.lenght = lenght;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getVideoTransactionId() {
+		return videoTransactionId;
+	}
+
+	public void setVideoTransactionId(String videoTransactionId) {
+		this.videoTransactionId = videoTransactionId;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public String getJsonString() {
+		return jsonString;
+	}
+
+	public void setJsonString(String jsonString) {
+		this.jsonString = jsonString;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
 
 }

@@ -9,4 +9,5 @@ import co.edu.usbcali.vas.model.Video;
 *
 */
 public interface IVideoDAO extends Dao<Video, Long> {
+	public Video getVideoByTransactionId(String transactionId) throws Exception;
 }

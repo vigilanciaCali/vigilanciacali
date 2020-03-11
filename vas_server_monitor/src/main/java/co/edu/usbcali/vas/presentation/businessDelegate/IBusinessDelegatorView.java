@@ -1,6 +1,5 @@
 package co.edu.usbcali.vas.presentation.businessDelegate;
 
-import java.io.InputStream;
 import java.util.List;
 
 import co.edu.usbcali.vas.model.CronJob;
@@ -27,6 +26,7 @@ import co.edu.usbcali.vas.model.UserType;
 import co.edu.usbcali.vas.model.Users;
 import co.edu.usbcali.vas.model.Video;
 import co.edu.usbcali.vas.model.VideoDocument;
+import co.edu.usbcali.vas.model.dto.AlgorithmDTO;
 import co.edu.usbcali.vas.model.dto.CronJobDTO;
 import co.edu.usbcali.vas.model.dto.CronJobMonitoringDTO;
 import co.edu.usbcali.vas.model.dto.DeviceDTO;
@@ -637,16 +637,37 @@ public interface IBusinessDelegatorView {
   	public Users authenticate(String usuLogin, String usuPassword) throws Exception;
   	public Users getUserByLogin(String usuLogin) throws Exception;
   	public void restoreUserPassword(String usuLogin) throws Exception;
-
-	
   	
   	//VIDEO
 	//public String searchVideo(String videoId) throws Exception;
   	
-  	//REST SERVICES
-  	public String processVideoWithAnomalousEventsAlg(String videoFileTemp, String videoId, String inputVideoFolder,
-			String outputVideoFolder, String externalProgramLocation, String initTimeParam, String finalTimeParam)
-			throws Exception;
+  	//REST SERVICES-----------------------------------------------------
+  	//ANOMALY DETECTION
+  	public void processVideoWithAnomalousEventsAlg() throws Exception;
+	public void anomalyDetetectionResult(AlgorithmDTO data) throws Exception;
+	public void startAnlAlgRequest() throws Exception;
+	public void stopAnlAlgRequest() throws Exception;
+	//TRACKER----------------------------
+	public void trackerDetetectionResult(AlgorithmDTO data) throws Exception;
+	public void startTrcAlgRequest() throws Exception;
+	public void stopTrcAlgRequest() throws Exception;
+	//INTEGRATION SERVICE
+	public Boolean isAnlAlgAvailable() throws Exception;
+	public Boolean isTrcAlgAvailable() throws Exception;
+	//TES REST Integration
+	public void sendDataToAnlService(AlgorithmDTO algorithmDTO) throws Exception;
+	public void sendDataToTrcService(AlgorithmDTO algorithmDTO) throws Exception;
+	//SYSTEM PARAMS
+	public SystemParameter getSystemParamByCode(String code) throws Exception;
+	//MONITORING
+	public Boolean validate_system_folderHddMonitoring() throws Exception;
+
+	
+
+	
+
+	
+
 	
 	
 }

@@ -15,8 +15,8 @@
  
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/vas_server_monitor" />
-		<property name="username" value="vas" />
-		<property name="password" value="vas@2018" />
+		<property name="username" value="postgres" />
+		<property name="password" value="12345678" />
 		
 	</bean>
 

@@ -75,44 +75,15 @@
 		]]>
 	</sql-query>
 	
-	<!-- ******************MESSAGE BOX ************************** -->
-	<!-- <sql-query name="getTotalNumberMessageBoxByCustomerId">
-		<![CDATA[
-			SELECT COUNT(id)
-			FROM message_box
-			WHERE customer_id = :pCustomerId
-		]]>
-	</sql-query>
-	
-	<sql-query name="getTotalNumberMessageBoxByCustomerIdNotReaded">
-		<![CDATA[
-			SELECT COUNT(id)
-			FROM message_box mb
-			WHERE mb.customer_id = :pCustomerId
-			AND mb.read = FALSE
-		]]>
-	</sql-query>
-	
-	<sql-query name="getDataMessageBoxByCustomer">
-		<return alias="mb" class="co.edu.usbcali.vas.model.MessageBox" />
+	<!-- ****************** VIDEO ************************** -->
+	<sql-query name="getVideoByTransactionId">
+		<return alias="vd" class="co.edu.usbcali.vas.model.Video" />
 		<![CDATA[
 			SELECT *
-			FROM message_box mb 
-			WHERE mb.customer_id = :pCustomerId
-			ORDER BY mb.created_at DESC
+			FROM video vd 
+			WHERE vd.transaction_id=:pTransactionId
 		]]>
 	</sql-query>
-	
-	<sql-query name="getDataMessageBoxByCustomerReaded">
-		<return alias="mb" class="co.edu.usbcali.vas.model.MessageBox" />
-		<![CDATA[
-			SELECT *
-			FROM message_box mb 
-			WHERE mb.customer_id = :pCustomerId
-			AND mb.read = TRUE
-			ORDER BY mb.created_at ASC
-		]]>
-	</sql-query> -->
 	
 
 	
