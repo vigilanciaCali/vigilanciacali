@@ -16,7 +16,7 @@
 		<spring.version>5.1.5.RELEASE</spring.version>
 		<mojarra.version>2.2.12</mojarra.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		<log4j2.version>2.11.1</log4j2.version>
+		<log4j2.version>2.15.0</log4j2.version>
 	</properties>
 
 	<dependencies>
